@@ -1,0 +1,303 @@
+body{
+    background-color: rgb(222, 220, 215);
+}
+.login-register {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .login-register .overlap-wrapper {
+    background-color: #ffffff;
+    width: 1440px;
+    height: 900px;
+  }
+  
+  .login-register .overlap {
+    position: relative;
+    height: 900px;
+    background-image: url(./img/the-interior-has-a-armchair-on-empty-white-wall-background-3d-rendering-1.png);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('./core/images/login-reg-bg.png');
+    background-blend-mode: overlay;
+    background-size: cover;
+
+  }
+  
+  .login-register .text-wrapper {
+    position: absolute;
+    top: 30px;
+    left: 42px;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .group {
+    position: absolute;
+    width: 541px;
+    height: 741px;
+    top: 80px;
+    left: 783px;
+    border-radius: 40px;
+    background-blend-mode: darken;
+  
+  }
+  
+  .login-register .overlap-group {
+    position: relative;
+    width: 539px;
+    height: 741px;
+    background-color: #ffffffbf;
+    border-radius: 40px;
+  }
+  
+  .login-register .div {
+    position: absolute;
+    width: 455px;
+    height: 116px;
+    top: 44px;
+    left: 44px;
+  }
+  
+  .login-register .group-2 {
+    position: absolute;
+    width: 455px;
+    height: 46px;
+    top: 0;
+    left: 0;
+  }
+  
+  .login-register .welcome-to-LOREM {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: transparent;
+    font-size: 21px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .span {
+    color: #000000;
+  }
+  
+  .login-register .text-wrapper-2 {
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #779341;
+  }
+  
+  .login-register .have-an-account-sign {
+    position: absolute;
+    top: 6px;
+    left: 329px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: transparent;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .text-wrapper-3 {
+    color: #8d8d8d;
+  }
+  
+  .login-register .text-wrapper-4 {
+    color: #779341;
+  }
+  
+  .login-register .text-wrapper-5 {
+    position: absolute;
+    top: 33px;
+    left: 0;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 55px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .overlap-group-wrapper {
+    position: absolute;
+    width: 238px;
+    height: 54px;
+    top: 608px;
+    left: 259px;
+  }
+  
+  .login-register .div-wrapper {
+    position: absolute;
+    width: 236px;
+    height: 54px;
+    background-color: #779341;
+    border-radius: 10px;
+    /* box-shadow: 0px 4px 19px #7793414c; */
+   
+    
+  }
+  .login-register .div-wrapper button{
+    box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
+
+  }
+  
+  .login-register .text-wrapper-6 {
+    position: absolute;
+    top: 15px;
+    left: 91px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .group-3 {
+    position: absolute;
+    width: 451px;
+    height: 340px;
+    top: 205px;
+    left: 44px;
+  }
+  
+  .login-register .group-4 {
+    position: absolute;
+    width: 451px;
+    height: 92px;
+    top: 0;
+    left: 0;
+  }
+  
+  .login-register .text-wrapper-7 {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .overlap-group-2 {
+    position: absolute;
+    width: 451px;
+    height: 57px;
+    top: 35px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid;
+    border-color: #4285f4;
+  }
+  
+  .login-register .text-wrapper-8 {
+    position: absolute;
+    width: 302px;
+    top: 17px;
+    left: 24px;
+    font-family: "Poppins-Light", Helvetica;
+    font-weight: 300;
+    color: #7f7f7f;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .group-5 {
+    position: absolute;
+    width: 451px;
+    height: 92px;
+    top: 248px;
+    left: 0;
+  }
+  
+  .login-register .overlap-2 {
+    position: absolute;
+    width: 451px;
+    height: 57px;
+    top: 35px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid;
+    border-color: #adadad;
+  }
+  
+  .login-register .group-6 {
+    position: absolute;
+    width: 402px;
+    height: 86px;
+    top: 127px;
+    left: 0;
+  }
+  
+  .login-register .group-7 {
+    position: absolute;
+    width: 167px;
+    height: 86px;
+    top: 0;
+    left: 0;
+  }
+  
+  .login-register .text-wrapper-9 {
+    position: absolute;
+    width: 216px;
+    top: -1px;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .overlap-group-3 {
+    position: absolute;
+    width: 216px;
+    height: 57px;
+    top: 29px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid;
+    border-color: #adadad;
+  }
+  
+  .login-register .text-wrapper-10 {
+    position: absolute;
+    width: 203px;
+    top: 18px;
+    left: 12px;
+    font-family: "Poppins-Light", Helvetica;
+    font-weight: 300;
+    color: #7f7f7f;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .login-register .group-8 {
+    position: absolute;
+    width: 167px;
+    height: 86px;
+    top: 0;
+    left: 235px;
+  }
+  
