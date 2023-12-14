@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+      {% comment %} 
+      <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+      {% endcomment %}
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&family=Lobster&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <!-- header -->
+      <header>
+         <div class="logo">Mero herbs <span style="color:#FF7426">.</span></div>
+          <a href="#" class="Home">
+          Home
+          </a>
+          {% comment %} <a href="#" class="Browse">
+          Browse
+          </a> {% endcomment %}
+          <div class="search-container">
+            <button class="filter-btn" type="submit"><img src="{% static '/dashboard/images/filter.png' %}">Filter</button>
+            <form action="" class="seach-bar">
+               <input type="text" placeholder="search" name="q">
+               <button type="submit" class="search-button"><img src= "{% static '/dashboard/images/search.png'%}"></button>
+            </form>
+         </div>
+         <div class="user-wrapper">
+            <img src="{% static 'dashboard/images/user.png' %}" class="user-icon" onclick="toggleMenu()">
+            
+            <a href="{% url 'core:signup'%} " class="signup">
+               <div class="signup-btn"> Sign up</div>
+            </a>
+         </div>
+         <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+            <div class="user-info">
+            <img src="{% static '/dashboard/images/user.png'%}" alt="check your connection" >
+            <h2>username</h2>
+            </div>
+            <hr>
+            <a href="#" class="sub-menu-link">
+            
+            <img src="{% static '/dashboard/images/edit.png'%} " alt= " ">
+            <p>Edit profile </p>
+            <span>></span>
+            </a>
+
+            <a href="#" class="sub-menu-link">
+            
+            <img src="{% static '/dashboard/images/addproduct.png'%} " alt= " ">
+            <p>Add product </p>
+            <span>></span>
+            </a>
+
+             <a href="#" class="sub-menu-link">
+            
+            <img src=" {% static '/dashboard/images/support.png'%}" alt= " ">
+            <p>Help and support </p>
+            <span>></span>
+            </a>
+
+             <a href="#" class="sub-menu-link">
+            
+            <img src=" {% static '/dashboard/images/logout.png'%} " alt= " ">
+            <p>Logout </p>
+            <span>></span>
+            </a>
+            </div>
+         
+         </div>
+      </header>
+      <!-- slider -->
+      <div class="slider">
+         <!-- list Items -->
+         <div class="list">
+            <div class="item active">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  <p>design</p>
+                  <h2>Slider 01</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  </p>
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  <p>design</p>
+                  <h2>Slider 02</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  </p>
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  <p>design</p>
+                  <h2>Slider 03</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  </p>
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.gettyimages.com/id/637030542/photo/kathmandu-crowds-of-people-outside-temples-patan-durbar-square-nepal.jpg?s=612x612&w=gi&k=20&c=s4H7-W4nNlpLGVagDNkUgBSPrsBFM2hCaAezMhUdxvk=">
+               <div class="content">
+                  <p>design</p>
+                  <h2>Slider 04</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  </p>
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  <p>design</p>
+                  <h2>Slider 05</h2>
+                  <p>
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  </p>
+               </div>
+            </div>
+         </div>
+         <!-- button arrows -->
+         <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+         </div>
+         <!-- thumbnail -->
+         {% comment %} 
+         <div class="thumbnail">
+            <div class="item active">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  Name Slider
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  Name Slider
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  Name Slider
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  Name Slider
+               </div>
+            </div>
+            <div class="item">
+               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <div class="content">
+                  Name Slider
+               </div>
+            </div>
+            {% endcomment %}
+         </div>
+      </div>
+      <div class="category">
+      <div class="category-wrapper">
+         <span class="category-text" > Categories</span>
+         <button class="category-btn">View all categories</button>
+      </div>
+      <div class="category-items">
+         <div class="items-wrapper">
+            <div class="items">
+               item1
+            </div>
+            <div class="items">
+               item2
+            </div>
+            <div class="items">
+               item3
+            </div>
+            <div class="items">
+               item4     
+            </div>
+            <div class="items">
+               item5     
+            </div>
+            <div class="items">
+               item6     
+            </div>
+         </div>
+      </div>
+      <div>
+      <script src="{% static 'dashboard.js'%}"></script>
+   </body>
+</html>

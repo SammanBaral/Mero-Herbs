@@ -32,12 +32,12 @@ class SignupForm(UserCreationForm):
 
     }))
     password1=forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':'Password',
+        'placeholder':'Retype Password',
         'class':'overlap-2'
 
     }))
     password2=forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':'Retype password',
+        'placeholder':'Password',
         'class':'overlap-group-3'
 
     }))

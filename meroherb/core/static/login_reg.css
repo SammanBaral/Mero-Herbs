@@ -19,7 +19,6 @@ body{
   .login-register .overlap {
     position: relative;
     height: 900px;
-    background-image: url(./img/the-interior-has-a-armchair-on-empty-white-wall-background-3d-rendering-1.png);
     background-size: cover;
     background-position: 50% 50%;
     background-image: url('./core/images/login-reg-bg.png');
