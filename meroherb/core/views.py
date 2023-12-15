@@ -1,19 +1,20 @@
 from django.shortcuts import redirect, render
 # from items.models import Categories,Items
 from .forms import SignupForm, LoginForm
+from item.models import Category, Item
 # Create your views here.
 # information about website like type of request get post
 
-# def index(request):
-#     items=Items.objects.filter(is_sold=False )[0:6]  #not showing sold items and limiting the items to 6 while displaying them
-#     category=Categories.objects.all()
+def browse(request):
+    items=Item.objects.filter(is_sold=False )[0:6]  #not showing sold items and limiting the items to 6 while displaying them
+    categories=Category.objects.all()
 
 
-#     #passing request so that the request will be available in the template
-#     return render(request,'core/index.html',{
-#         'categories': category,
-#         'items':items,
-#     })
+    #passing request so that the request will be available in the template
+    return render(request,'item/browse.html',{
+        'categories': categories,
+        'items':items,
+    })
 
 
 # def contact(request):

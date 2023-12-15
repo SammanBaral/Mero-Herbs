@@ -20,9 +20,9 @@
           <a href="#" class="Home">
           Home
           </a>
-          {% comment %} <a href="#" class="Browse">
+         <a href="{% url 'item:browse'% }" class="Browse">
           Browse
-          </a> {% endcomment %}
+          </a>
           <div class="search-container">
             <button class="filter-btn" type="submit"><img src="{% static '/dashboard/images/filter.png' %}">Filter</button>
             <form action="" class="seach-bar">
@@ -51,7 +51,7 @@
             <span>></span>
             </a>
 
-            <a href="#" class="sub-menu-link">
+            <a href="{% url 'item:new' %}" class="sub-menu-link">
             
             <img src="{% static '/dashboard/images/addproduct.png'%} " alt= " ">
             <p>Add product </p>
