@@ -8,24 +8,32 @@
     <title>Browse</title>
 </head>
 <body>
-    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <div class="mt-5 px-6 py-12 grid grid-cols-5 gap-4 bg-gray-100">
+        <div class="col-span-1">
+            <form method="get" action="{% url 'item:browse' %}">
+                <input name="query" class="w-full py-4 border rounded-xl" type="text" value="{{query}}" placeholder="Search for a herb">
+
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+        </div>
     
-        <h2 class="mb-12 text-2xl text-center">Herbs</h2>
-        <div class="grid grid-cols-3 gap-3">
-            <!-- {% for item in items %} -->
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <div>
-                            <img src="{{item.image.url}}" class= "rounded-t-xl">
-                        </div>
-                    
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{item.name}}</h2>
-                            <p class="text-gray-500">Price: {{item.price}}</p>
-                        </div>
-                    </a>
-                </div>
-            <!-- {% endfor %} -->
+        {% comment %} <h2 class="mb-12 text-2xl text-center">Herbs</h2> {% endcomment %}
+        <div class="col-span-4">
+            <div class="grid grid-cols-3 gap-3">
+                <!-- {% for item in items %} -->
+                    <div>
+                        <a href="{% url 'item:detail' item.id %}">
+                            <div>
+                                <img src="{{item.image.url}}" class= "rounded-t-xl">
+                            </div>
+                        
+                            <div class="p-6 bg-white rounded-b-xl">
+                                <h2 class="text-2xl">{{item.name}}</h2>
+                                <p class="text-gray-500">Price: {{item.price}}</p>
+                            </div>
+                        </a>
+                    </div>
+                <!-- {% endfor %} -->
+            </div>
         </div>
     
     </div>
