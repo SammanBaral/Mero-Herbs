@@ -35,8 +35,6 @@ def signup(request):
     })
 
 
-def logout(request):
-    
-    return redirect('core.login')
+
 
 
