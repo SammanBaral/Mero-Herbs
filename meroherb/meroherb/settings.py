@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 
 #overriding default login redirect so that we can go to the desired page
 LOGIN_URL='/login/'
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
+# LOGIN_REDIRECT_URL='dashboard/'
+# LOGOUT_REDIRECT_URL='login/'
 
 
 # Application definition

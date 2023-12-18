@@ -1,32 +1,74 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>{{title}}</title>
+    <title>{{ title }}</title>
 </head>
-<body>
-    <h1 class="mb-6 text-3xl">{{title}}</h1>
-    <form methos="post" action="." enctype="multipart/form-data">
-        {% csrf_token %}
+<body class="min-h-screen flex items-center justify-center">
+    <div class="bg-image" style="background-image: url('{% static 'item/images/new.png' %}'); background-size: cover;">
+        <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+            <h1 class="mb-6 text-3xl font-bold text-teal-500">{{ title }}</h1>
 
-        <div class="space-y-4">
-            {{form.as_p}}
+            <form method="post" action="." enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+
+                <div class="space-y-2">
+                    <label for="{{ form.category.id }}" class="text-gray-700 font-semibold block">Category:</label>
+                    {{ form.category }}
+                </div>
+
+                <div class="space-y-2">
+                    <label for="{{ form.name.id }}" class="text-gray-700 font-semibold block">Name:</label>
+                    {{ form.name }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.scientific_name.id }}" class="text-gray-700 font-semibold block">Scientific Name:</label>
+                    {{ form.scientific_name }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.price.id }}" class="text-gray-700 font-semibold block">Price:</label>
+                    {{ form.price }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.quantity_available.id }}" class="text-gray-700 font-semibold block">Quantity Available:</label>
+                    {{ form.quantity_available }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.usage_and_benefits.id }}" class="text-gray-700 font-semibold block">Usage and Benefits:</label>
+                    {{ form.usage_and_benefits }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.description.id }}" class="text-gray-700 font-semibold block">Description:</label>
+                    {{ form.description }}
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="{{ form.image.id }}" class="text-gray-700 font-semibold block">Image:</label>
+                    {{ form.image }}
+                </div>
+                
+
+                {% if form.errors or form.non_field_errors %}
+                    <div class="text-red-500 bg-red-100 p-4 rounded-md">
+                        {% for field in form %}
+                            {{ field.errors }}
+                        {% endfor %}
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-md text-white">Submit</button>
+            </form>
         </div>
-
-        
-        {%if form.errors or form.non_field_errors%}
-            <div class="mb-3 p-6 bg-red-100 rounded-xl"> 
-                {% for field in form%}
-                    {{field.errors}}
-                {%endfor%}
-                    {{form.non_field_errors}}
-            </div>  
-        {%endif%}
-
-        <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
-    </form>
+    </div>
 </body>
 </html>

@@ -6,7 +6,7 @@ INPUT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
 class NewItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('category', 'scientific_name', 'description', 'usage_and_benefits', 'price', 'quantity_available', 'image', )
+        fields = ('category', 'name','scientific_name', 'description', 'usage_and_benefits', 'price', 'quantity_available', 'image', )
 
         widgets = {
             'category': forms.Select(attrs={

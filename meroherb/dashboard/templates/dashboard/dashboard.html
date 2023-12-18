@@ -15,33 +15,36 @@
    </head>
    <body>
       <!-- header -->
-      <header>
-         <div class="logo">Mero herbs <span style="color:#FF7426">.</span></div>
-          <a href="#" class="Home">
+      <div class="navbar">
+         <div class="logo">
+            Mero herbs <span style="color:#FF7426">.</span></div>
+         <div class="navbar-links">
+          <a href="#">
           Home
           </a>
-         <a href="{% url 'item:browse'% }" class="Browse">
+         <a href="{% url 'item:browse' %}" class="Browse">
           Browse
           </a>
-          <div class="search-container">
-            <button class="filter-btn" type="submit"><img src="{% static '/dashboard/images/filter.png' %}">Filter</button>
-            <form action="" class="seach-bar">
-               <input type="text" placeholder="search" name="q">
-               <button type="submit" class="search-button"><img src= "{% static '/dashboard/images/search.png'%}"></button>
-            </form>
          </div>
-         <div class="user-wrapper">
+         
+          <div class="user-wrapper">
             <img src="{% static 'dashboard/images/user.png' %}" class="user-icon" onclick="toggleMenu()">
-            
-            <a href="{% url 'core:signup'%} " class="signup">
-               <div class="signup-btn"> Sign up</div>
-            </a>
+            {% if request.user.is_authenticated %}
+            {%else%}
+               <a href="{% url 'core:signup'%} " class="signup">
+                  <div class="signup-btn"> Sign up</div>
+               </a>
+            {%endif%}
          </div>
          <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
             <div class="user-info">
             <img src="{% static '/dashboard/images/user.png'%}" alt="check your connection" >
-            <h2>username</h2>
+            {% if request.user.is_authenticated%}
+            <h2>{{ request.user.username}}</h2>
+            {%else%}
+            <h2>Username</h2>
+            {%endif%}
             </div>
             <hr>
             <a href="#" class="sub-menu-link">
@@ -65,7 +68,7 @@
             <span>></span>
             </a>
 
-             <a href="#" class="sub-menu-link">
+             <a href="{%url 'dashboard:login'%}" class="sub-menu-link">
             
             <img src=" {% static '/dashboard/images/logout.png'%} " alt= " ">
             <p>Logout </p>
@@ -74,64 +77,76 @@
             </div>
          
          </div>
-      </header>
+      </div>
       <!-- slider -->
       <div class="slider">
          <!-- list Items -->
          <div class="list">
             <div class="item active">
-               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <img src="{% static './dashboard/images/vibrantherb.png'%}">
                <div class="content">
-                  <p>design</p>
-                  <h2>Slider 01</h2>
-                  <p>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  {% comment %} <p>design</p> {% endcomment %}
+                  <h2>Welcome to Nature's Garden</h2>
+                  <p style="margin-top:6vh">
+                     Discover the Power of Organic Herbs for a Healthier, Happier You
                   </p>
+                  <a href="{% url 'item:browse'%}" style="text-decoration:none">
+                     <div class="explore-btn">Shop Now</div>
+                  </a>
                </div>
             </div>
             <div class="item">
-               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <img src="{% static './dashboard/images/deliveryherb.png' %}">
                <div class="content">
-                  <p>design</p>
-                  <h2>Slider 02</h2>
-                  <p>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
-                  </p>
+                  {% comment %} <p>design</p> {% endcomment %}
+                  <h2 style="font-size:5vw">Bringing Nature to Your Doorstep</h2>
+                  <p style="margin-top:6vh">
+                     Fast and Fresh Herb Delivery - Experience the Difference.                  </p>
+                  
+                  <a href="{% url 'item:browse'%}" style="text-decoration:none">
+                     <div class="explore-btn">Shop Now</div>
+                  </a>
                </div>
             </div>
             <div class="item">
-               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <img src="https://blog.mountainroseherbs.com/hubfs/Blog%20images/Herbs%20for%20Skincare%20Banner.jpg#keepProtocol">
                <div class="content">
-                  <p>design</p>
-                  <h2>Slider 03</h2>
-                  <p>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  <h2>Purity in Every leaf</h2>
+                  {% comment %} <h2>Slider 03</h2> {% endcomment %}
+                  <p style="margin-top:6vh">
+                     Certified Organic Herbs - From Farm to Your Table.
                   </p>
+                  <a href="#" style="text-decoration:none">
+                     <div class="explore-btn">Explore our collection</div>
+                  </a>
                </div>
             </div>
             <div class="item">
-               <img src="https://media.gettyimages.com/id/637030542/photo/kathmandu-crowds-of-people-outside-temples-patan-durbar-square-nepal.jpg?s=612x612&w=gi&k=20&c=s4H7-W4nNlpLGVagDNkUgBSPrsBFM2hCaAezMhUdxvk=">
+               <img src="{% static './dashboard/images/Untitled design (1).png'%}">
                <div class="content">
-                  <p>design</p>
-                  <h2>Slider 04</h2>
-                  <p>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                  {% comment %} <p>design</p> {% endcomment %}
+                  <h2>
+                     Harvested with Care
+                  </h2>
+                  <p style="margin-top:6vh">
+                     "Handpicked for Maximum Potency and Flavor."
                   </p>
+                  <a href="#" style="text-decoration:none">
+                     <div class="explore-btn">Discover wellness</div>
+                  </a>
                </div>
             </div>
             <div class="item">
-               <img src="https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=">
+               <img src="{% static './dashboard/images/family-home-drinking-tea.jpg'%}">
                <div class="content">
-                  <p>design</p>
-                  <h2>Slider 05</h2>
-                  <p>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                 
+                  <h2>Tea Time, Anytime</h2>
+                  <p style="margin-top:6vh">
+                     Indulge in the Soothing Aromas and Health Benefits of Our Herbal Teas.
                   </p>
+                  <a href="#" style="text-decoration:none">
+                     <div class="explore-btn">Find Your Favorite Blend</div>
+                  </a>
                </div>
             </div>
          </div>
@@ -183,33 +198,61 @@
       </div>
       <div class="category-items">
          <div class="items-wrapper">
+            <a href="#">
             <div class="items">
-               item1
+               <div class="catimg">
+               <img src="{% static './dashboard/images/ayurvedic2.jpg'%}">
+               </div>
+               <span style="margin-left:2vw">Ayurvedic herbs</span>
+
             </div>
+         </a>
+         <a href="#">
             <div class="items">
-               item2
+               <div class="catimg">
+               <img src="{% static './dashboard/images/culinary_.jpg'%}">
+               </div>
+               <span style="margin-left:2vw">Culinary herbs</span>            
             </div>
+         </a>
+         <a href="#">
             <div class="items">
-               item3
+               <div class="catimg">
+               <img src="{% static './dashboard/images/medicinal.jpg'%}">
+
+               </div>
+               <span style="margin-left:2vw">Medicinal herbs</span>
+
             </div>
+         </a>
+         <a href="#">
             <div class="items">
-               item4     
+               <div class="catimg">
+               <img src="{% static './dashboard/images/still-life-loose-tea.jpg'%}">
+               </div>  
+               <span style="margin-left:3vw">Herbal tea</span>   
+
             </div>
+         </a>
+         <a href="#">
             <div class="items">
-               item5     
+               <div class="catimg">
+               <img src="{% static './dashboard/images/immune.jpg' %}">
+               </div>
+               <span style="margin-left:2vw">Hollistic  Herbs</span>     
+
             </div>
-            <div class="items">
-               item6     
-            </div>
+         </a>
+      
          </div>
       </div>
-      <div>
+   </div>
 
          
     <!-- CARD HTMLLLL
     =========== -->
 
-
+   <div style="margin-top:30px">
    <div class="text-herbs">
       <p>Some Popular Herbs</p>
    </div>
@@ -283,6 +326,7 @@
           <a href="">BUY NOW</a>
       </div>
   </section>
+</div>
   <div class="seller-text">
       <p>POPULAR SELLERS</p>
   </div>
@@ -327,7 +371,7 @@
                <div class="text">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum eos ut consectetur numquam ullam fuga animi laudantium nobis rem molestias.
                </div>
-               <button>Read more</button>
+               <button style="background:'black'">Read more</button>
             </div>
          </div>
          <div class="inner-part">
@@ -372,7 +416,7 @@
 
   <footer class="footer-distributed">
       <div class="footer-left">
-          <h3>Mero<span>Herbs</span></h3>
+          <h3><span>Mero Herbs</span></h3>
           <p class="footer-links">
               <a href="#">Home</a>
               |
