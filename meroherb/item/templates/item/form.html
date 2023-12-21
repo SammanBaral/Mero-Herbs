@@ -16,10 +16,16 @@
             <form method="post" action="." enctype="multipart/form-data" class="space-y-4">
                 {% csrf_token %}
 
-                <div class="space-y-2">
-                    <label for="{{ form.category.id }}" class="text-gray-700 font-semibold block">Category:</label>
-                    {{ form.category }}
-                </div>
+                {% if form.fields.category %}
+                    {% if form.initial.category %}
+                        <!-- 'Category' field is not rendered when editing -->
+                    {% else %}
+                        <div class="space-y-2">
+                            <label for="{{ form.category.id }}" class="text-gray-700 font-semibold block">Category:</label>
+                            {{ form.category }}
+                        </div>
+                    {% endif %}
+                {% endif %}
 
                 <div class="space-y-2">
                     <label for="{{ form.name.id }}" class="text-gray-700 font-semibold block">Name:</label>
@@ -55,6 +61,14 @@
                     <label for="{{ form.image.id }}" class="text-gray-700 font-semibold block">Image:</label>
                     {{ form.image }}
                 </div>
+
+                {% if title == 'Edit item' %}
+                    <div class="space-y-2">
+                        <label for="{{ form.is_sold.id }}" class="text-gray-700 font-semibold block">Is Sold:</label>
+                        {{ form.is_sold }}
+                    </div>
+                {% endif %}
+
                 
 
                 {% if form.errors or form.non_field_errors %}
