@@ -1,54 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>{{item.name}}</title>
+    <title>{{ item.name }}</title>
 </head>
-<body>
-    <div class="container mx-auto mt-6 p-6 bg-gray-100 rounded-xl">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <div class="md:col-span-2">
-                <img src="{{item.image.url}}" class="rounded-xl w-full">
-            </div>
 
-            <div class="md:col-span-3 p-6 bg-teal-50 rounded-xl">
-                <h1 class="mb-6 text-3xl font-bold text-gray-800">{{item.name}}</h1>
+<body class="container mx-auto mt-6 p-6 bg-gray-100 rounded-xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div class="md:col-span-2">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="rounded-xl w-full">
+        </div>
 
-                <div class="details">
-                    <p class="detail-item text-black"><strong>Scientific Name: </strong>{{item.scientific_name}}</p>
-                    <hr class="my-2 border-gray-300">
-                    
-                    <p class="detail-item text-black"><strong>Price: </strong>{{item.price}}</p>
-                    <hr class="my-2 border-gray-300">
+        <div class="md:col-span-3 p-6 bg-teal-50 rounded-xl">
+            <h1 class="mb-6 text-3xl font-bold text-gray-800">{{ item.name }}</h1>
 
-                    <p class="detail-item text-black"><strong>Quantity available: </strong>{{item.quantity_available}}</p>
-                    <hr class="my-2 border-gray-300">
+            <div class="details">
+                <p class="detail-item text-black"><strong>Scientific Name: </strong>{{ item.scientific_name }}</p>
+                <hr class="my-2 border-gray-300">
 
-                    {% if item.usage_and_benefits %}
-                        <p class="detail-item text-black">
-                            <strong class="text-black">Usage and benefits: </strong><br>
-                            {{item.usage_and_benefits}}
-                        </p>
-                        <hr class="my-2 border-gray-300">
-                    {% endif %}
+                <p class="detail-item text-black"><strong>Price: </strong>{{ item.price }}</p>
+                <hr class="my-2 border-gray-300">
 
-                    {% if item.description %}
-                        <p class="detail-item text-black">
-                            <strong class="text-black">Description: </strong><br>
-                            {{item.description}}
-                        </p>
-                        <hr class="my-2 border-gray-300">
-                    {% endif %}
+                <p class="detail-item text-black"><strong>Quantity available: </strong>{{ item.quantity_available }}</p>
+                <hr class="my-2 border-gray-300">
 
-                    <p class="detail-item text-black"><strong>Seller: </strong>{{item.created_by}}</p>
-                    <hr class="my-2 border-gray-300">
-                </div>
+                {% if item.usage_and_benefits %}
+                <p class="detail-item text-black">
+                    <strong class="text-black">Usage and benefits: </strong><br>
+                    {{ item.usage_and_benefits }}
+                </p>
+                <hr class="my-2 border-gray-300">
+                {% endif %}
 
-                <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-black text-white rounded-xl hover:bg-gray-800">Contact Seller</a>
+                {% if item.description %}
+                <p class="detail-item text-black">
+                    <strong class="text-black">Description: </strong><br>
+                    {{ item.description }}
+                </p>
+                <hr class="my-2 border-gray-300">
+                {% endif %}
+
+                <p class="detail-item text-black"><strong>Seller: </strong>{{ item.created_by }}</p>
+                <hr class="my-2 border-gray-300">
+
+                {% if request.user == item.created_by %}
+                    <a href="{% url 'item:edit' item.id %}"
+                        class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit Item
+                    </a>
+
+                    <a href="{% url 'item:delete' item.id %}"
+                        class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-black text-white rounded-xl">Delete Item
+                    </a>
+
+                {% else %}
+                    <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-black text-white rounded-xl hover:bg-gray-800"
+                        target="_blank">Contact Seller</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </body>
+
 </html>
