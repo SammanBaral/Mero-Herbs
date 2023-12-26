@@ -4,9 +4,14 @@ from django.contrib.auth import logout
 # Create your views here.
 
 def dashboardView(request):
-
     return render(request,'dashboard/dashboard.html')
 
 def logout_view(request):
     logout(request)
-    return redirect ("dashboard:login")
+    return redirect ("core:login")
+
+def sellerprofile(request):
+    return render(request,'dashboard/profile.html')
+
+def home(request):
+    return render(request,'dashboard/dashboard.html')

@@ -6,39 +6,50 @@ from django.contrib.auth.models import User
 class LoginForm(AuthenticationForm):
     username=forms.CharField(widget=forms.TextInput(attrs={
         'placeholder':'Your username',
-        'class':'overlap-group-2'
+        'class':'usernamebox',
 
     }))
     password=forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder':'Password',
-        'class':'overlap-group-2'
-
+        'class':'passwordbox',
 
     }))
 
 class SignupForm(UserCreationForm):
     class Meta:
         model=User
-        fields=('username','email','password1','password2')
+        fields=('username','email','password1','password2','first_name','last_name','contact_number')
 
     username=forms.CharField(widget=forms.TextInput(attrs={
         'placeholder':'Your username',
-        'class':'overlap-group-3'
-
+        'class':'usernamebox'
     }))
     email=forms.CharField(widget=forms.EmailInput(attrs={
         'placeholder':'Your email',
-        'class':'overlap-group-2'
+        'class':'emailbox'
 
     }))
     password1=forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':'Retype Password',
-        'class':'overlap-2'
+        'placeholder':'Password',
+        'class':'passwordbox'
 
     }))
     password2=forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder':'Password',
-        'class':'overlap-group-3'
+        'placeholder':'Retype Password',
+        'class':'passwordbox'
 
+
+    }))
+    first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+        'placeholder': 'Your first name',
+        'class':'firstnamebox'
+    }))
+    last_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={
+        'placeholder': 'Your last name',
+        'class':'lastnamebox'
+    }))
+    contact_number = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
+        'placeholder': 'Your contact number',
+        'class':'contactbox'
     }))
 
