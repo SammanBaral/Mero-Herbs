@@ -14,9 +14,9 @@ class Category(models.Model):
 class Item(models.Model):
     category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    scientific_name = models.CharField(max_length=255, default='UnknownScientificName')
+    scientific_name = models.CharField(max_length=255, default='')
     description = models.TextField(blank=True, null=True)
-    usage_and_benefits = models.TextField(default='NoUsageorBenefitProvided', blank=False, null=False)
+    usage_and_benefits = models.TextField(default='', blank=False, null=False)
     price = models.CharField(max_length=255)
     quantity_available = models.CharField(max_length=255, default= "100 gm")
     image = models.ImageField(upload_to='item_images', blank=False, null=False)
