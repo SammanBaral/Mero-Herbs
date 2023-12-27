@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="{% static 'Profile.css'%}" />
+    <script src="{% static 'Profile.js'%}" defer></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div>{% include 'dashboard/navbar.html' %}</div>
+    <div class="bg_cover">
+      <div class="parent_wrapper">
+        <div class="user_parent">
+          <div class="user_img">
+            <img src="{% static './dashboard/images/profile.jpg'%}" />
+          </div>
+
+          <div class="user_data">
+            <div class="names">
+              <div class="f_l_name">Elon musk</div>
+              <div class="user_name">@{{request.user.username}}</div>
+            </div>
+            <div class="location">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="address">KTM,Nepal</span>
+            </div>
+            <span class="rating">⭐⭐⭐⭐⭐</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content_parent">
+        <div class="navigation_section">
+          <div class="products_btn" onclick="showTab('tab1')">Products</div>
+          <div class="feedback_btn" onclick="showTab('tab2')">Feedback</div>
+        </div>
+
+        <!--content contains products and feedback-->
+
+        <div class="content_body" id="tab1">
+          <div class="content">
+            <div class="products">
+              <div class="product_img">
+                <img src="{% static './dashboard/images/culinary-sq-8.jpg'%}" />
+              </div>
+              <div class="product_info">
+                <div class="name_section">
+                  <span class="category">Category</span>
+                  <span class="name">Name</span>
+                  <span class="product_rating">⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="price_section">
+                  <span>15000</span>
+                  <a href="#">Add to cart</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content_body" id="tab2">
+          <div class="content">
+            <div class="products">
+              <div class="product_img">
+                <img src="{% static './dashboard/images/culinary-sq-8.jpg'%}" />
+              </div>
+              <div class="product_info">
+                <div class="name_section">
+                  <span class="category">Category</span>
+                  <span class="name">Name</span>
+                  <span class="product_rating">⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="price_section">
+                  <span>15000</span>
+                  {% comment %} <a href="#">Add to cart</a> {% endcomment %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end of content-->
+    </div>
+  </body>
+</html>
