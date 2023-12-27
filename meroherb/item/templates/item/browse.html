@@ -1,47 +1,56 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom CSS for light white background color */
-        .bg-herb-box {
-            background-color: rgb(231, 249, 253); /* Light white background color */
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'browse.css' %}">
     <title>Browse</title>
 </head>
-<body>
-    <div class="container mx-auto mt-6 p-6 bg-gray-100 rounded-xl">
-        <h2 class="mb-12 text-2xl text-center font-bold text-gray-800">Herbs</h2>
+<body class="bg-gray-100 font-sans">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 rounded-xl {% if category.id == category_id %} bg-gray-100 {% endif %}">
+                        <a href="{% url 'item:browse' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="clearbtn">
+                <a href="{% url 'item:browse'%}" class="py-3 px-4 bg-yellow-500 text-lg rounded-xl text-white">Clear Filters</a>
+            </div>
 
-        <!-- Search Bar -->
-        <div class="mb-8 flex justify-center items-center"> <!-- Center items horizontally and vertically -->
-            <form method="get" action="{% url 'item:browse' %}" class="flex items-center"> <!-- Use flex container for form elements -->
-                <input name="query" class="w-96 py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 border rounded-xl" type="text" value="{{query}}" placeholder="Search for a herb">
-                <button class="ml-2 py-4 px-8 text-lg bg-black text-white rounded-xl">Search</button> <!-- Black background for the search button -->
-            </form>
         </div>
 
-        <!-- Items Grid -->
-        <div class="grid grid-cols-3 gap-6"> <!-- Adjusted the gap to 6 for better spacing -->
-            <!-- {% for item in items %} -->
-                <div class="h-full bg-herb-box rounded-xl"> <!-- Custom class for the light white background -->
-                    <a href="{% url 'item:detail' item.id %}">
-                        <div>
-                            <img src="{{item.image.url}}" class="rounded-t-xl h-40 object-cover w-full"> <!-- Adjusted height and added width -->
-                        </div>
-                    
-                        <div class="p-4">
-                            <h2 class="text-xl text-black font-semibold">{{item.name}}</h2> <!-- Adjusted text size, color, and added font-weight -->
-                            <p class="text-gray-500">Price: {{item.price}}</p>
-                        </div>
-                    </a>
-                </div>
-            <!-- {% endfor %} -->
+        <!-- Main Content -->
+        <div class="main_content">
+            <!-- Search Bar -->
+            <div class="input-box">
+                <i class="uil uil-search"></i>
+                <form method="get" action="{% url 'item:browse' %}" class="flex items-center w-full">
+                    <input name="query" class="flex-grow py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 border rounded-xl" type="text" value="{{query}}" placeholder="Search for a herb">
+                    <button class="btn">Search</button>
+                </form>
+            </div>
+
+            <!-- Card Views -->
+            <div class="container-card">
+                {% for item in items %}
+                    <div class="card bg-herb-box rounded-xl mb-6">
+                        <a href="{% url 'item:detail' item.id %}">
+                            <div class="card-image" style="background-image: url('{{ item.image.url }}');"></div>
+                            <div class="p-4">
+                                <h2 class="text-xl text-black font-semibold">{{ item.name }}</h2>
+                                <p class="text-gray-500">Price: {{ item.price }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    
     </div>
 </body>
 </html>
