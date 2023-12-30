@@ -457,8 +457,7 @@ svg{
     display: flex;
     flex-wrap :wrap;
     height: 80vmin;
-    width: 80vmax;
-    background-color: yellowgreen;
+    width: 95%;
     align-self: center;
 }
 .u_mid_body{
@@ -466,29 +465,45 @@ svg{
     height: 100%;
     display: flex;
     flex-flow:  row wrap;
-    background-color: red;
+    justify-content: space-around;
+
 }
 .u_mid_body .right_body{
     display: flex;
     flex-flow: column wrap;
     height: 100%;
-    width: 30vmax;
+    width: 35vmax;
     align-items: center;
-    gap:3vmin;
-    background-color: #50D94D
+    justify-content: space-around;
 
 }
 .right_body .right_text{
-    background-color: #e0ac1c;
+    display: flex;
+    flex-flow: column wrap;
+    line-height: 1.7rem;
+    font-family: Inter,sans-serif;
+    gap: 3vmin;
+    background-color: #E7FAFE;
     height: 30vmin;
     width: 100%;
+    border-radius: 1rem;
 
+}
+.right_text h1{
+    margin-top: 0.9rem;
+    font-size: 2.4rem;
+    margin-left: 0.9rem;
+}
+.right_text span{
+    font-size: 1.2rem;
+    font-family: Inter,sans-serif;
+    width: 90%;
+    margin-left: 0.9rem;
 }
 .right_body .right_box{
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
-    background-color: #000;
+    justify-content: space-around;
     height: 46vmin;
     width: 100%;
 
@@ -496,26 +511,142 @@ svg{
 .rb1{
     display: flex;
     align-self: flex-end;
-    height: 20vmin;
-    width: 12vmax;
-    background-color: #0d333f;
+    height: 40vmin;
+    width: 15vmax;
+    border-radius: 12%;
+}
+.rb1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12%;
 
 }
 .right_box .rb2{
-    height: 20vmin;
-    width: 12vmax;
-    background-color: #0d0925;
+    height: 40vmin;
+    width: 15vmax;
+    border-radius: 12%;
     
 }
+.rb2 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12%;
+
+}
+.middle_body{
+    display: flex;
+    width: 22%;
+    height: 80%;
+    align-self: center;
+    border-radius: 50%;
+
+}
+.middle_body img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.left_body{
+    display: flex;
+    flex-flow: column wrap;
+    width: 35vmax;
+    height: 100%;
+    justify-content: space-around;
+}
+.left_body .left_box{
+    display: flex;
+    flex-flow: row wrap;
+    height: 46vmin;
+    width: 100%;
+    justify-content: space-around;
+}
+.lb1{
+    display: flex;
+    align-self: flex-end;
+    height: 40vmin;
+    width: 15vmax;
+    border-radius: 12%;
+
+}
+.lb1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12%;
+
+}
+.lb2{
+    height: 40vmin;
+    width: 15vmax;
+    border-radius: 12%;
+    
+}
+.lb2 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12%;
+
+}
+.left_text{
+    display: flex;
+    flex-flow: column wrap;
+    line-height: 1.7rem;
+    font-family: Inter,sans-serif;
+    gap: 3vmin;
+    background-color: #E7FAFE;
+    border-radius: 1rem;
+    height: 30vmin;
+    width: 100%;
+}
+.left_text h1{
+    margin-top: 0.9rem;
+    font-size: 2.4rem;
+    margin-left: 0.9rem;
+
+}
+.left_text span{
+    font-size: 1.2rem;
+    font-family: Inter,sans-serif;
+    width: 90%;
+    margin-left: 0.9rem;
+
+}
+
 
 /* middle part content start */
 .middle_parent{
     display: flex;
     align-self: center;
     flex-flow: column wrap;
-    width: 80%;
+    width: 95%;
     gap: 12vmin;
     border-radius: 0.9rem;
+
+}
+.middle_text{
+    display: flex;
+    flex-flow: column wrap;
+    align-self: center;
+    gap: 3vmin;
+    line-height: 1.7rem;
+    align-items: center;
+    width: 80%;
+    background-color: #E7FAFE;
+    border-radius: 1rem;
+}
+.middle_text h1{
+    margin-top: 0.4rem;
+    font-size: 2.4rem;
+    font-family: Inter,sans-serif;
+}
+.middle_text span{
+    font-size: 1.2rem;
+    font-family: Inter,sans-serif;
+    width: 90%;
 
 }
 
@@ -523,14 +654,15 @@ svg{
     display: flex;
     flex-wrap: wrap;
     flex-flow: row wrap;
-    justify-content: flex-end;
-    gap: 8vmax;
+    justify-content: space-around;
+    align-items: center;
 
 }
 .upper_part .upper_text{
     display: flex;
     align-self: center;
     flex-flow: column wrap;
+    line-height: 1.7rem;
     gap: 3vmin;
     font-family: Inter,sans-serif;
     font-size: 0.8rem;
@@ -542,13 +674,32 @@ svg{
 }
 .upper_text p{
     font-size: 1.2rem;
+    font-family: Inter,sans-serif;   
+}
+.upper_part .upper_text2{
+    display: flex;
+    align-self: flex-end;
+    margin-left: -3vmax;
+    margin-right: 1.3vmax;
+    line-height: 1.7rem;
+    flex-flow: column wrap;
+    gap: 3vmin;
     font-family: Inter,sans-serif;
-    
+    font-size: 0.8rem;
+}
+.upper_text2 h1{
+    font-size: 2.4rem;
+    font-family: Inter,sans-serif;
+
+}
+.upper_text2 p{
+    font-size: 1.2rem;
+    font-family: Inter,sans-serif;   
 }
 .upper_part .upper_card{
     display: flex;
     flex-flow: row wrap;
-    gap: 3vmax;
+    gap: 2vmin;
     height: 80vmin;
     border-radius: 0.9rem;
 
@@ -579,14 +730,15 @@ svg{
     width: 100%;
     height: 100%;
     border-radius: 0.9rem;
+    
 }
 .lowerpart{
     display: flex;
     flex-flow: row wrap;
-    gap: 3vmax;
     height: 40vmin;
-    justify-content: center;
     width: 100%;
+    justify-content: space-around;
+    align-items: center;
 }
 .lower1{
     height: 40vmin;
@@ -644,7 +796,6 @@ svg{
     border-radius: 0.8rem;
     background-color: #E7FAFE;
     align-self: center;
-    box-shadow: 7px 7px 60px #000;
 
 }
 .herbs_body{

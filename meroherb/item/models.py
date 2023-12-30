@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Avg
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -24,5 +26,20 @@ class Item(models.Model):
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def average_rating(self):
+        avg_rating = review.objects.filter(item=self).aggregate(avg_rating=Avg('rating'))
+        return avg_rating['avg_rating'] if avg_rating['avg_rating'] else 0
     def __str__(self):
         return self.name
+    
+
+
+
+
+class  review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    review_desp = models.CharField(max_length=100)
+    rating = models.IntegerField()
+
+

@@ -35,7 +35,6 @@
             <div class="item active">
                <img src="{% static './dashboard/images/vibrantherb.png'%}">
                <div class="content">
-                  {% comment %} <p>design</p> {% endcomment %}
                   <h2>Welcome to Nature's Garden</h2>
                   <p style="margin-top:6vh">
                      Discover the Power of Organic Herbs for a Healthier, Happier You
@@ -48,7 +47,6 @@
             <div class="item">
                <img src="{% static './dashboard/images/deliveryherb.png' %}">
                <div class="content">
-                  {% comment %} <p>design</p> {% endcomment %}
                   <h2 style="font-size:5vw">Bringing Nature to Your Doorstep</h2>
                   <p style="margin-top:6vh">
                      Fast and Fresh Herb Delivery - Experience the Difference.                  </p>
@@ -62,7 +60,6 @@
                <img src="https://blog.mountainroseherbs.com/hubfs/Blog%20images/Herbs%20for%20Skincare%20Banner.jpg#keepProtocol">
                <div class="content">
                   <h2>Purity in Every leaf</h2>
-                  {% comment %} <h2>Slider 03</h2> {% endcomment %}
                   <p style="margin-top:6vh">
                      Certified Organic Herbs - From Farm to Your Table.
                      
@@ -75,7 +72,6 @@
             <div class="item">
                <img src="{% static './dashboard/images/Untitled design (1).png'%}">
                <div class="content">
-                  {% comment %} <p>design</p> {% endcomment %}
                   <h2>
                      Harvested with Care
                   </h2>
@@ -117,31 +113,43 @@
      {% endblock %}
       </div>
 
-
-
       <div class="u_mid_parent">
          <div class="u_mid_body">
             <div class="right_body">
                <div class="right_text">
+                  <h1>Fair Trade</h1>
+                  <span>Our commitment to exceptional care applies not only to our products, but also to the hardworking people who grow them.</span>
                </div>
                <div class="right_box">
                   <div class="rb1">
+                     <img src="{% static './dashboard/images/india-fairtrade-3-square.jpg'%}">
                   </div>
                   <div class="rb2">
+                     <img src="{% static './dashboard/images/agriculture-opt.jpg'%}">
+
                   </div>
                </div>
             </div>
             <div class="middle_body">
+               <img src="{% static './dashboard/images/teagiftsdec23.jpg'%}">
             </div>
             <div class="left_body">
                <div class="left_box">
+                  <div class="lb1">
+                     <img src="{% static './dashboard/images/shawn-zerowaste-2020-square.jpg'%}">
+                  </div>
+                  <div class="lb2">
+                     <img src="{% static './dashboard/images/packaging-sustainability-square4.png'%}">
+                  </div>
                </div>
                <div class="left_text">
+                  <h1>ZERO WASTE</h1>
+                  <span>We focus on reduction, reclamation, and recycling. Our first priority is to make sure we only use what we need, and that's one reason we adopted our zero waste policy.
+                  </span>
                </div>
             </div>
          </div>
       </div>
-    
 
 
    <div class="middle_parent">
@@ -152,23 +160,31 @@
          </div>
          <div class="upper_card">
             <div class="upper1">
-               <img src="{% static './dashboard/images/deliveryherb.png'%}">
+               <img src="{% static './dashboard/images/home-sus-sq-1-.jpg'%}">
+            </div>
+            <div class="upper_text2">
+               <h1>Organic agriculture</h1>
+               <p>Our passion for organics is woven into every<br> fiber of our operations. We believe this<br> is necessary to realize our mission <br> put people, plants, and planet over profit.</p>
             </div>
             <div class="upper2">
-               <img src="{% static './dashboard/images/deliveryherb.png'%}">
+               <img src="{% static './dashboard/images/sustainability-farm-square.jpg'%}">
             </div>
          </div>
       </div>
+      <div class="middle_text">
+         <h1>Sourcing practices</h1>
+         <span>Through ethical and responsible sourcing, we proudly offer one of the largest selections of certified organic herbs, spices, and botanicals in North America.</span>
+      </div>
+      
       <div class="lowerpart">
-
          <div class="lower1">
-            <img src="{% static './dashboard/images/deliveryherb.png'%}">
+            <img src="{% static './dashboard/images/hands-square.webp'%}">
          </div>
          <div class="lower2">
-            <img src="{% static './dashboard/images/deliveryherb.png'%}">
+            <img src="{% static './dashboard/images/agriculture-opt.jpg'%}">
          </div>
          <div class="lower3">
-            <img src="{% static './dashboard/images/deliveryherb.png'%}">
+            <img src="{% static './dashboard/images/sourcing-opt.jpg'%}">
          </div>
       </div>
    </div>
@@ -181,160 +197,29 @@
    <div class="card_parent">
       <span class="popularherbs">Some popular herbs</span>
       <div class="herbs_body">
-
-            <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
+         {% for item in items %}
          <div class="herbs">
             <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
+               <img src="{{item.image.url}}">
             </div>
             <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
+               <span class="category">{{item.category}}</span>
+               <h1 class="name">{{item.name}}</h1>
                <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
+               <a href="{% url 'dashboard:sellerprofile' item.created_by.pk %}" style="text-decoration:none">
+               <h2 class="seller_name">{{item.created_by}}</h2>
+               </a>
             </div>
             <div class="price_section">
-               <h1>$1200</h1>
+               <h1>{{item.price}}</h1>
                <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
                <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
             </div>
          </div>
+         {% endfor %}
 
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{% static './dashboard/images/deliveryherb.png' %}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">Category</span>
-               <h1 class="name">Name</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <h2 class="seller_name">Hari prasad</h2>
-            </div>
-            <div class="price_section">
-               <h1>$1200</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
       </div>
+
    </div>
       
 

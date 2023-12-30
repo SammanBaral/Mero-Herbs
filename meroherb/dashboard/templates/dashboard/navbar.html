@@ -7,12 +7,11 @@
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&family=Lobster&display=swap" rel="stylesheet">
 
 
     <link rel="stylesheet" href="{% static 'navbar.css'%}" />
-    {% comment %} <script src="{% static "navbar.js" %}" ></script> {% endcomment %}
   </head>
   <body>
 
@@ -39,7 +38,7 @@
        {%endif%}
     </div>
     <div class="sub-menu-wrap" id="subMenu">
-       <div class="sub-menu">
+       <div class="sub-menu" style="border-radius: 20px;">
        <div class="user-info">
        <img src="{% static '/dashboard/images/user.png'%}" alt="check your connection" >
        {% if request.user.is_authenticated%}
@@ -49,7 +48,7 @@
        {%endif%}
        </div>
        <hr>
-       <a href="{% url 'dashboard:sellerprofile'%}" class="sub-menu-link">
+       <a href="#" class="sub-menu-link">
        
        <img src="{% static '/dashboard/images/edit.png'%} " alt= " ">
        <p>Edit profile </p>
@@ -57,11 +56,11 @@
        </a>
 
        <a href="{% url 'item:new' %}" class="sub-menu-link">
-       
        <img src="{% static '/dashboard/images/addproduct.png'%} " alt= " ">
        <p>Add product </p>
        <span>></span>
        </a>
+
 
         <a href="#" class="sub-menu-link">
        

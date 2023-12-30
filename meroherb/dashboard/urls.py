@@ -11,6 +11,6 @@ urlpatterns=[
     path('dashboard/',views.dashboardView,name='dashboard'),
     path('products/',include('item.urls')),
     path('logout/', views.logout_view, name='logout'),
-    path('profile/',views.sellerprofile,name="sellerprofile"),
+    path('profile/<int:pk>',views.sellerprofile,name="sellerprofile"),
     path('home/',views.home,name="home"),
 ]
