@@ -36,8 +36,8 @@
 
           <div class="user_data">
             <div class="names">
-              <div class="f_l_name">Elon musk</div>
-              <div class="user_name">@{{request.user.username}}</div>
+              <div class="f_l_name">{{seller_info.first_name}} {{seller_info.last_name}}</div>
+              <div class="user_name">@{{seller_info.username}}</div>
             </div>
             <div class="location">
               <i class="fa-solid fa-location-dot"></i>
@@ -77,28 +77,44 @@
           </div>
         </div>
 
+      
+        
+
+      
+
         <div class="content_body" id="tab2">
-          <div class="content">
-            <div class="products">
-              <div class="product_img">
-                <img src="{% static './dashboard/images/culinary-sq-8.jpg'%}" />
-              </div>
-              <div class="product_info">
-                <div class="name_section">
-                  <span class="category">Category</span>
-                  <span class="name">Name</span>
-                  <span class="product_rating">⭐⭐⭐⭐⭐</span>
+          <div class="content_feedback">
+
+                 <!-- Review Form -->
+                 <form method="POST" action="">
+                  {% csrf_token %}
+                  {{ comment_form.as_p }}
+                  <button type="submit" name="comment_submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Add Comment</button>
+              </form>
+                {% for comment in comments%}
+                <div class="comment_body">
+
+                  <div class="comment_user">
+                    <h1> @{{comment.user}}</h1>              
+                    <span>{{comment.created_at}}</span>
+                  </div>
+                  
+                  <div class="comment">
+                    {{comment.text}}
+                  </div>
+
                 </div>
-                <div class="price_section">
-                  <span>15000</span>
-                  {% comment %} <a href="#">Add to cart</a> {% endcomment %}
-                </div>
-              </div>
-            </div>
+              {%endfor%}
+           
           </div>
         </div>
       </div>
       <!--end of content-->
     </div>
+    <script>
+      // Assuming you have an input field with id="comment_text"
+    document.getElementById('comment_text').value = ''; // Clears the input field after submission
+    </script>
+
   </body>
 </html>
