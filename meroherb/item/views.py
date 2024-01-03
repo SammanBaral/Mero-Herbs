@@ -1,26 +1,40 @@
-from venv import logger
+from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from .forms import NewItemForm, EditItemForm
-from .models import Category, Item, review
-from django.contrib.auth.models import User
+from .models import Category, Item
+
+def is_valid_queryparam(param):
+    return param != '' and param is not None and param !=0.0
 
 def browse(request): 
     query = request.GET.get('query', '')
     category_id= request.GET.get('category', 0)
     categories=Category.objects.all()
     items = Item.objects.filter(is_sold=False)
-    
-    if category_id:
-        items=items.filter(category_id=category_id)
+    print(items)
+    price_min=request.GET.get('input_min',0)
+    price_max=request.GET.get('input_max',0)
 
-    if query:
-        items = items.filter(name__icontains=query)
+    if category_id:
+        items=Item.objects.filter(category_id=category_id)
+        print(items)
+
+    elif query:
+        items = Item.objects.filter(name__icontains=query)
+        print(query)
+
+   
+    elif is_valid_queryparam(price_min) and is_valid_queryparam(price_max):
+        items = Item.objects.filter(price__range=(float(price_min),float(price_max)))
 
     return render(request,'item/browse.html',{
         'items': items,
         'query': query,
         'categories': categories,
+        'price_max':price_max,
+        'price_min':price_min,
+
     })
 
 def detail(request, pk):
