@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import Category, Item
+from .models import Category, Item,review,ItemImage,ItemImageGallery
 
 admin.site.register(Category)
 admin.site.register(Item)
+admin.site.register(review)
+admin.site.register(ItemImage)
+admin.site.register(ItemImageGallery)
+
+
+
