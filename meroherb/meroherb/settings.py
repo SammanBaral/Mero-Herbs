@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'core',
     'dashboard',
     'item',
+    'userprofile',
+    'sellerform',
 ]
 
 MIDDLEWARE = [

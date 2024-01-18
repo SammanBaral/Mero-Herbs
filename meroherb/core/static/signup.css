@@ -34,11 +34,6 @@
     color: rgb(176, 33, 33);
     font-size: 1rem;
     font-family: Poppins,sans-serif;
-    height: 5vw;
-    width: 5vw;
-    align-self: center;
-    width: 20vmax;
-    margin-bottom: 2vmax;
     font-weight: 600;
   }
   
@@ -75,10 +70,9 @@
     justify-self: center;
     font-size: 21px;
     gap: 2vh;
-    margin-top: 3vh;
     align-self: center;
   }
-  .welcome span{
+  .welcome .card_upper_meroherb{
     color: #50D94D;
   }
   .signin{
