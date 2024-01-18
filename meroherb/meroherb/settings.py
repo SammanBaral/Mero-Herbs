@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 #overriding default login redirect so that we can go to the desired page
 LOGIN_URL='/login/'
-LOGIN_REDIRECT_URL='/dashboard/'
+LOGIN_REDIRECT_URL='/main/'
 # LOGOUT_REDIRECT_URL='login/'
 
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'item',
     'userprofile',
     'sellerform',
+    'chatting',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#SMTP Configuration
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT= 587
+EMAIL_USE_TLS= True
+EMAIL_HOST_USER='meroherbs0@gmail.com'
+EMAIL_HOST_PASSWORD='abxx zbeb njtu cjku '
