@@ -6,10 +6,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .decorators import allowed_users
 from .forms import NewItemForm, EditItemForm
 from .models import Category, Item, review,ItemImage
-from django.contrib.auth.models import User
-from django.contrib.auth.models import User,Group
-from sellerform.forms import UserProfilePhotoForm
 from .models import ItemImageGallery, ItemImage
+from django.db import IntegrityError
 
 
 
@@ -113,44 +111,74 @@ def browse(request):
     category_id= request.GET.get('category', 0)
     categories=Category.objects.all()
     items = Item.objects.filter(is_sold=False)
+    
+    items_with_images = []
+    for product in items:
+        item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+        product_data = {
+            'product': product,
+            'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+        }
+        items_with_images.append(product_data)
    
     
     if category_id:
         items=items.filter(category_id=category_id)
+        items_with_images = []
+        for product in items:
+            item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+            product_data = {
+                'product': product,
+                'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+            }
+            items_with_images.append(product_data)
 
     if query:
         items = items.filter(name__icontains=query)
+        items_with_images = []
+        for product in items:
+            item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+            product_data = {
+                'product': product,
+                'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+            }
+            items_with_images.append(product_data)
 
     return render(request,'item/browse.html',{
-        'items': items,
+        'items_with_images': items_with_images,
         'query': query,
         'categories': categories,
         
     })
+
+from django.shortcuts import redirect
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     reviews = review.objects.filter(item=item)
     item_image_gallery = ItemImageGallery.objects.filter(item=item).first()
 
-  
     if request.method == 'POST':
         star_rating = request.POST.get('rating')
         item_review = request.POST.get('item_review')
-        review.objects.create(user=request.user, item=item, rating=star_rating, review_desp=item_review)
+
+        try:
+            review.objects.create(user=request.user, item=item, rating=star_rating, review_desp=item_review)
+        except IntegrityError:
+            messages.error(request, "Please fill all the fields")
+        else:
+            # Redirect to the same detail page after successful review submission so that the user should not resubmit data on reload
+            return redirect('item:detail', pk=pk)
 
     return render(request, 'item/detail.html', {
         'item': item,
         'reviews': reviews,
         'item_image_gallery': item_image_gallery,
-
     })
+
 
 @login_required
 @allowed_users(allowed_roles=['seller'])
-
-
-
 def new(request):
     if request.method == 'POST':
         form = NewItemForm(request.POST)
@@ -159,6 +187,10 @@ def new(request):
         if form.is_valid():
             if len(image_files) > 4:
                 messages.error(request, "You can upload a maximum of 4 images.")
+                return render(request, 'item/form.html', {
+                'form': form,
+                'title': 'New item',}
+                )
             
             item = form.save(commit=False)
             item.created_by = request.user
@@ -213,63 +245,3 @@ def Category_view(request,pro):
     category=Category.objects.get(name=pro)
     product=Item.objects.filter(category=category)
     return render(request,'item/browse.html',{'items':product,'category':category})
-
-
-def sellerform(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-
-        # Check if the user exists
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            # Handle case where user doesn't exist
-            return render(request, 'sellerform/sellerform.html', {'error': 'User does not exist'})
-
-        # Check if the user should be granted seller status
-        if user_should_be_seller(user):
-            # Get or create the 'seller' group
-            seller_group, created = Group.objects.get_or_create(name='seller')
-            # Add user to 'seller' group
-            user.groups.add(seller_group)
-
-            # Now, handle the profile picture upload
-            form = UserProfilePhotoForm(request.POST,request.FILES)
-            if form.is_valid():
-                profile = form.save(commit=False)
-                profile.user = user
-                profile.save()
-                return redirect('item:home')
-            else:
-                return render(request, 'sellerform/sellerform.html', {'error': 'Form is not valid'})
-        else:
-            return render(request, 'sellerform/sellerform.html', {'error': 'User does not meet requirements to be a seller'})
-
-    else:
-        form = UserProfilePhotoForm()
-
-    return render(request, 'sellerform/sellerform.html', {'form': form})
-
-
-def user_should_be_seller(user):
-    # Example criteria:
-    # Check if the user has been active for a certain period (e.g., 30 days)
-    # active_threshold = timedelta(days=1)
-    # if timezone.now() - user.date_joined < active_threshold:
-    #     return False
-
-    # # Check if the user has verified their email
-    # if not user.email or not user.email_verified:
-    #     return False
-
-    # # Check if the user has completed a certain number of orders
-    # min_orders_completed = 10
-    # user_orders_completed = user.orders.filter(status='completed').count()
-    # if user_orders_completed < min_orders_completed:
-    #     return False
-
-    # # Add more conditions here based on your application's requirements
-    # # ...
-
-    # If all criteria are met, return True
-    return True
