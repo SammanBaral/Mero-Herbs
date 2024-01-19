@@ -1,15 +1,17 @@
+header{
+    width: 100vw;
+}
 .navbar{
     width: 100%;
     height: 90px;
     display: flex ;
     flex-flow: row wrap;
-    position: relative;
     z-index: 100;
     background-color: #008148;
     opacity: 89%;   
     align-items: center;
-    justify-content: center;
-    gap:38vw
+    justify-content: space-between;
+    position: relative;
 }
 .navbar-links {
     display: flex;
@@ -17,8 +19,6 @@
     gap:2vmax;
     text-decoration: none;
     color: black;
-
-
 }
 .navbar-links a{
     text-decoration: none;
@@ -37,6 +37,7 @@
     width: 60px;
     align-items: center;
     justify-content: left;
+   
 }
 
  .menu{
@@ -56,7 +57,6 @@
 .user-wrapper{
     display: flex;
    
-    
 
 }
 .user-wrapper img{
@@ -64,7 +64,6 @@
     height: 42px;
     width: 42px;
     margin-right: 40px;
-    margin-top: 5px;
     cursor: pointer;
     border-radius:50%;
 }
@@ -147,7 +146,6 @@
     font-size: 1rem;
     font-weight: 600;
     font-family: 'AvenirNext forINTUIT', Helvetica, sans-serif;
-    position: relative;
     cursor: pointer;
     margin-right: 30px;
     align-items: center;
