@@ -15,6 +15,7 @@ urlpatterns = [
     path('password_reset/', include('django.contrib.auth.urls')),
     path('',include('item.urls')),
     path('',include('sellerform.urls')),
+    path('',include('userprofile.urls')),
     path('inbox/', include('chatting.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
