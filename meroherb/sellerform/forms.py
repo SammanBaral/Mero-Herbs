@@ -4,7 +4,7 @@ from .models import SellerAccount
 class UserProfilePhotoForm(forms.ModelForm):
     class Meta:
         model=SellerAccount
-        fields=('image',)
+        fields=('image','bio', 'location')
 
         widgets={
             'image': forms.FileInput(attrs={

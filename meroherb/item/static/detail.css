@@ -75,7 +75,7 @@ body{
     height: 112vmin;
     display: flex;
     flex-flow: column wrap;
-    gap: 7vmin;
+    gap: 5vmin;
 }
 .product_details_main .product_upper{
     display: flex;

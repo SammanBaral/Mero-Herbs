@@ -2,30 +2,50 @@
 <html lang="en">
 
 <head>
+    {%load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="{% static 'inbox.css'%}">
     <title>Inbox</title>
 </head>
-<body>
-    <h1 class="mb-6 text-3xl">Inbox</h1>
-    <div class="space-y-6">
-        {% for chatting in conversations %}
-            <a href="{% url 'chatting:detail' chatting.id %}">
-                <div class="p-6 flex bg-gray-100 rounded-xl">
-                    <div class="pr-6">
-                        <img src="{{ chatting.item.itemimagegallery.images.first.image.url}}" class="w-20 rounded-xl">
-                </div>
 
-                <div>
-                    {% for member in chatting.members.all %}
+<header>{% include 'dashboard/navbar.html'%}</header>
+
+<body>
+    <div class="parent">
+        <span class="username">{{request.user.username}}</span>
+
+        <div class="message_holder_parent">
+            <span class="message_header">Messages</span>
+
+            {% for chatting in conversations %}
+            <a href="{% url 'chatting:detail' chatting.id %}" >
+                <div class="message_box" >
+                    <div style="width: 56px; height: 56px; border-radius: 50%;">
+                        <img src="{{ chatting.item.itemimagegallery.images.first.image.url}}" style="border-radius: 50%; object-fit: cover;
+                        height: 100%; width: 100%;">
+                    </div>
+                    <div class="message_info">
+                        {% for member in chatting.members.all %}
                         {% if member != request.user %}
-                            <p class="mb-4"><strong>{{ member.username }}</strong> | {{ chatting.modified_at }}</p>
-                            <p>{{ chatting.item.name }}</p>
+                        <p ><strong>{{ member.username }}</strong> | {{ chatting.modified_at }}</p>
+                        <p><span>Product:</span> {{ chatting.item.name }}</p>
                         {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+
                 </div>
-            </div>
-                </a>
-        {% endfor %}
+            </a>
+            {% endfor %}
+
+        </div>
+
+    </div>
 </body>
+
+<footer>
+    {% include 'dashboard/footer.html'%}
+</footer>
+
+</html>
