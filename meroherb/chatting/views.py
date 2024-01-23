@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from item.models import Item
 from .forms import ConversationMessageForm
+from django.core.exceptions import ObjectDoesNotExist
+
 from .models import Chatting
 
 @login_required
@@ -39,16 +41,44 @@ def new_conversation (request, item_pk):
     })
 
 @login_required
+
 def inbox(request):
     conversations = Chatting.objects.filter(members__in=[request.user.id])
-    return render(request,'chatting/inbox.html',{
-        'conversations': conversations
+    return render(request, 'chatting/inbox.html', {
+        'conversations': conversations,
+      
     })
+
+
+
+
+
 
 @login_required
 def detail(request, pk):
     conversation = Chatting.objects.filter(members__in=[request.user.id]).get(pk=pk)
+    messages = Chatting.objects.filter(members__in=[request.user.id])
+
+      # Initialize seller information to None
+    seller_username = None
+    seller_image_url = None
+    convo_user=None
+
+    # Iterate through all conversations and messages
+    for convo in messages:
+        for message in convo.messages.all():
+            # Check if the message is from the seller and not the current user
+            if message.created_by != request.user:
+                convo_user=message.created_by.id
+                seller_username = message.created_by.username
+
+                try:
+                    seller_image_url = message.created_by.selleraccount.image.url
+                except ObjectDoesNotExist:
+                    seller_image_url=None
+                break  # Exit the loop once seller information is found
     
+    print(convo_user)
     if request.method == 'POST':
         form=ConversationMessageForm(request.POST)
 
@@ -64,9 +94,12 @@ def detail(request, pk):
     else:
         form = ConversationMessageForm()
 
-    return render(request, 'chatting/detail.html',{
+    return render(request, 'chatting/messages.html',{
         'conversation': conversation,
-        'form': form
+        'form': form,
+        'seller_username': seller_username,
+        'seller_image_url': seller_image_url,
+        'convo_user':convo_user
     })
 
 # Create your views here.

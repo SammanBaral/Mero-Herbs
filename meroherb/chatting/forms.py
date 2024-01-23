@@ -7,6 +7,7 @@ class ConversationMessageForm(forms.ModelForm):
         fields = ('content',)
         widgets={
             'content': forms.Textarea(attrs={
-                'class': 'w-full py-4 rounded-xl border'
+                'class': 'message_box',
+                'style':'resize:none'
             })
         }
