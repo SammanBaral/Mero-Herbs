@@ -3,11 +3,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import UserProfileForm, BioLocationForm
+from .forms import UserProfileForm
 from django.contrib import messages
-from userprofile.models import UserProfile  # Adjust the import based on your app structure
-from sellerform.models import SellerAccount
-
+from userprofile.models import UserProfile
 @login_required
 def userprofile(request):
     user = request.user
@@ -44,37 +42,37 @@ def userprofile(request):
     print("Rendering userprofile.html")
     return render(request, 'userprofile/userprofile.html', {'user': user, 'user_profile_form': user_profile_form, 'password_change_form': password_change_form})
 
-@login_required
-@user_passes_test(lambda user: user.groups.filter(name='seller').exists())
-def update_bio_location(request):
-    user = request.user
+# @login_required
+# @user_passes_test(lambda user: user.groups.filter(name='seller').exists())
+# def update_bio_location(request):
+#     user = request.user
 
-    try:
-        seller_profile = SellerAccount.objects.get(user=user)
-    except SellerAccount.DoesNotExist:
-        messages.error(request, 'Seller profile does not exist. Please complete the seller registration first.')
-        return redirect('userprofile:userprofile')
+#     try:
+#         seller_profile = SellerAccount.objects.get(user=user)
+#     except SellerAccount.DoesNotExist:
+#         messages.error(request, 'Seller profile does not exist. Please complete the seller registration first.')
+#         return redirect('userprofile:userprofile')
 
-    if request.method == 'POST':
-        form = BioLocationForm(request.POST, initial={'bio': seller_profile.bio, 'location': seller_profile.location})
+#     if request.method == 'POST':
+#         form = BioLocationForm(request.POST, initial={'bio': seller_profile.bio, 'location': seller_profile.location})
 
-        if form.is_valid():
-            bio = form.cleaned_data['bio']
-            location = form.cleaned_data['location']
+#         if form.is_valid():
+#             bio = form.cleaned_data['bio']
+#             location = form.cleaned_data['location']
 
-            # Update SellerProfile
-            seller_profile.bio = bio
-            seller_profile.location = location
-            seller_profile.save()
+#             # Update SellerProfile
+#             seller_profile.bio = bio
+#             seller_profile.location = location
+#             seller_profile.save()
 
-            messages.success(request, 'Bio and location updated successfully.')
-            print("Form is valid. Data saved successfully.")
-        else:
-            messages.error(request, 'Invalid form data. Please check your input.')
-            print("Form is invalid. Errors:", form.errors)
+#             messages.success(request, 'Bio and location updated successfully.')
+#             print("Form is valid. Data saved successfully.")
+#         else:
+#             messages.error(request, 'Invalid form data. Please check your input.')
+#             print("Form is invalid. Errors:", form.errors)
 
-        # return redirect('userprofile:userprofile')
-    else:
-        form = BioLocationForm(initial={'bio': seller_profile.bio, 'location': seller_profile.location})
+#         # return redirect('userprofile:userprofile')
+#     else:
+#         form = BioLocationForm(initial={'bio': seller_profile.bio, 'location': seller_profile.location})
 
-    return render(request, 'userprofile/userprofile.html', {'form': form})
+#     return render(request, 'userprofile/userprofile.html', {'form': form})

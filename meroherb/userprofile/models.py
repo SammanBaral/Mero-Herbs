@@ -9,4 +9,5 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     contact_number = models.CharField(max_length=15, null= True, blank=True)
+    location = models.CharField(max_length=50,null = True, blank=True)
     # Add additional fields for the user profile (e.g., phone_number, etc.)

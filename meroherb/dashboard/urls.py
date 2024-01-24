@@ -3,6 +3,7 @@ from django.contrib.auth.views import LogoutView
 
 from . import views
 from core import urls
+from userprofile import urls
 
 app_name='dashboard'
 
@@ -13,4 +14,5 @@ urlpatterns=[
     path('logout/', views.logout_view, name='logout'),
     path('profile/<int:pk>',views.sellerprofile,name="sellerprofile"),
     path('home/',views.home,name="home"),
+    path('', include('userprofile.urls')),
 ]
