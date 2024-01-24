@@ -52,4 +52,8 @@ class SignupForm(UserCreationForm):
         'placeholder': 'Your contact number',
         'class':'contactbox'
     }))
+    location = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
+        'placeholder': 'Your location',
+        'class':'locationbox'
+    }))
 

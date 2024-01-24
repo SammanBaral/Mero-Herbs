@@ -1,35 +1,33 @@
 from django.shortcuts import redirect, render
-# from items.models import Categories,Items
 from .forms import SignupForm, LoginForm
 from item.models import Category, Item
 from django.contrib import messages
 from item.decorators import unauthenticated_user
-
-
-# Create your views here.
-# information about website like type of request get post
-
-
-
-
+from userprofile.models import UserProfile  # Import your UserProfile model
 
 @unauthenticated_user
 def signup(request):
-    if request.method=='POST':
-        form=SignupForm(request.POST)
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Registered successfully!")
+            # Create User instance
+            user = form.save()
+
+            # Create UserProfile instance
+            user_profile = UserProfile.objects.create(
+                user=user,
+                username=form.cleaned_data['username'],
+                contact_number=form.cleaned_data['contact_number'],
+                location=form.cleaned_data['location'],
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                # Add other fields as needed
+            )
+
+            messages.success(request, "Registered successfully!")
             return redirect('/login')
     else:
-        form=SignupForm()
+        form = SignupForm()
 
-
-    return render(request,'core/signup.html',{
-        'form':form
-    })
-
-
-
-
-
+    return render(request, 'core/signup.html', {'form': form})
