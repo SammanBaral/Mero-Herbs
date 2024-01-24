@@ -7,8 +7,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 # Import Debug Toolbar only for development
-if settings.DEBUG:
-    import debug_toolbar
+
 
 app_name = "meroherb"
 
@@ -23,11 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# Add Debug Toolbar URL patterns only for development
-if settings.DEBUG:
-    urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+# Add Debug Toolbar URL patterns only for developments
 
 # Serve media files during development
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
