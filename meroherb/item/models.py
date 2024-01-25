@@ -67,7 +67,7 @@ class ItemImageGallery(models.Model):
 class  review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    review_desp = models.CharField(max_length=100)
+    review_desp = models.CharField(max_length=900)
     rating = models.IntegerField()
 
 

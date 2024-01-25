@@ -70,9 +70,9 @@ def sellerform(request):
 def user_should_be_seller(user):
     # Example criteria:
     # Check if the user has been active for a certain period (e.g., 30 days)
-    active_threshold = timedelta(days=1)
-    if timezone.now() - user.date_joined < active_threshold:
-        return False
+    # active_threshold = timedelta(days=1)
+    # if timezone.now() - user.date_joined < active_threshold:
+    #     return False
 
     # Check if the user has verified their email
     # if not user.email or not user.email_verified:

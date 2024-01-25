@@ -66,7 +66,12 @@ def detail(request, pk):
 
     # Iterate through all conversations and messages
     for convo in messages:
+        print(convo)
+
         for message in convo.messages.all():
+            print(message)
+            print(message.created_by)
+
             # Check if the message is from the seller and not the current user
             if message.created_by != request.user:
                 convo_user=message.created_by.id
