@@ -130,48 +130,7 @@
     border-bottom: 1px solid var(--cultured);
     margin-bottom: 30px
   }
-  
-  @keyframes popup {
-    0% {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none
-    }
-  
-    100% {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all
-    }
-  }
-  
-  @keyframes scaleUp {
-    0% {
-      transform: scale(.9)
-    }
-  
-    100% {
-      transform: scale(1)
-    }
-  }
-  
-  @keyframes slideInOut {
-  
-    0%,
-    100%,
-    45% {
-      transform: translateX(calc(-100% - 40px));
-      opacity: 0;
-      visibility: hidden
-    }
-  
-    50%,
-    95% {
-      transform: translateX(0);
-      opacity: 1;
-      visibility: visible
-    }
-  }
+ 
   
   .header-top {
     display: none

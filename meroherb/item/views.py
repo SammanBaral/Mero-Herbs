@@ -105,12 +105,23 @@ def mainpage(request):
 
  
 
+def is_valid_queryparam(param):
+    return param != '' and param is not None and param !=0.0   #for price
 
 def browse(request): 
     query = request.GET.get('query', '')
     category_id= request.GET.get('category', 0)
     categories=Category.objects.all()
     items = Item.objects.filter(is_sold=False)
+    price_min=request.GET.get('input-min',0)
+    price_max=request.GET.get('input-max',0)
+    for product in items:
+            if product.discount > 0:
+                print("discount")
+                discounted_price = Decimal(product.price) * (1 - Decimal(product.discount) / 100)
+                product.discounted_price = discounted_price
+                print(discounted_price)
+    
     
     items_with_images = []
     for product in items:
@@ -124,6 +135,27 @@ def browse(request):
     
     if category_id:
         items=items.filter(category_id=category_id)
+
+        for item in items:
+            if(item.discount > 0):
+                discounted_price = Decimal(product.price) * (1 - Decimal(product.discount) / 100)
+                item.discounted_price=discounted_price
+                print(discounted_price)
+
+       
+        items_with_images = []
+       
+
+        for product in items:
+            item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+            product_data = {
+                'product': product,
+                'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+            }
+            items_with_images.append(product_data)
+
+    elif query:
+        items = items.filter(name__icontains=query)
         items_with_images = []
         for product in items:
             item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
@@ -133,8 +165,8 @@ def browse(request):
             }
             items_with_images.append(product_data)
 
-    if query:
-        items = items.filter(name__icontains=query)
+    elif is_valid_queryparam(price_min) and is_valid_queryparam(price_max):
+        items = Item.objects.filter(price__range=(float(price_min),float(price_max)))
         items_with_images = []
         for product in items:
             item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
@@ -243,5 +275,15 @@ def edit(request, pk):
 
 def Category_view(request,pro):
     category=Category.objects.get(name=pro)
-    product=Item.objects.filter(category=category)
-    return render(request,'item/browse.html',{'items':product,'category':category})
+    products=Item.objects.filter(category=category)
+
+    items_with_images = []
+    for product in products:
+        item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+        product_data = {
+            'product': product,
+            'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+        }
+        items_with_images.append(product_data)
+
+    return render(request,'item/browse.html',{'items_with_images':items_with_images,'category':category})

@@ -169,6 +169,19 @@ body{
 /* CARD CSS
 --------- */
 
+.showcase-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: hsl(152, 51%, 52%);
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: hsl(0, 100%, 100%);
+  padding: 0 8px;
+  border-radius: 5px;
+  z-index: 3
+}
+
 .container-card {
   display: flex;
   justify-content: center;
@@ -201,20 +214,21 @@ body{
   color: #333; /* Adjust text color */
 }
 
-.card p {
+.card p { 
   padding: 5px;
   color: #555; /* Adjust text color */
   text-align: left;
 }
 
-.rating {
+.rating_showcase {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
   gap: .3rem;
-  color: var(--sandy-brown);
   margin-bottom: 10px;
   padding: 10px;
 }
+
 
 .checked {
   color: #ffcc00; /* Adjust checked star color */
