@@ -29,7 +29,7 @@ body{
 .maincontent{
   display: flex;
   flex-flow: column wrap;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .maincontent{
   width: 100vw;
@@ -43,6 +43,7 @@ body{
   padding: 0;
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .maincontent .filtercat  ul li{

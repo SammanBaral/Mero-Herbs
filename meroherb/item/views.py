@@ -140,7 +140,6 @@ def browse(request):
             if(item.discount > 0):
                 discounted_price = Decimal(product.price) * (1 - Decimal(product.discount) / 100)
                 item.discounted_price=discounted_price
-                print(discounted_price)
 
        
         items_with_images = []
@@ -187,6 +186,11 @@ from django.shortcuts import redirect
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
+    
+    if(item.discount > 0):
+                discounted_price = Decimal(item.price) * (1 - Decimal(item.discount) / 100)
+                item.discounted_price=discounted_price
+                print(discounted_price)
     reviews = review.objects.filter(item=item)
     item_image_gallery = ItemImageGallery.objects.filter(item=item).first()
 

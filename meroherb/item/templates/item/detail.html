@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ item.name }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'detail.css'%}">
@@ -57,10 +57,18 @@
                     </div>
                     <div class="product_price">
                         <span style="color: #545454;">PRICE</span>
-                        <section>
-                            <del style="color: #545454;">{{item.price}}</del>
-                            <span style="font-size: 0.91rem;">(50% off) </span>
-                            <strong style="font-size: 1rem; color: #008148;"> $200</strong>
+                        <section style="font-size: 1rem; color: #008148;">
+                            {% if item.discounted_price %}
+                            <p class="price"><strong>${{ item.discounted_price|floatformat:2 }}</strong></p>
+                            {% if item.discount > 0 %}
+                                <del>${{ item.price }}</del>
+                                <span style="font-size: 0.91rem;">({{item.discount}}% off) </span>
+
+                            {% endif %}
+                            {% else %}
+                            <p class="price"><strong>${{ item.price }}</strong></p>
+                            {% endif %}
+
                         </section>
                     </div>
                 </div>

@@ -2,9 +2,10 @@ from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.models import User,Group
-from item.models import Item
+from item.models import Item, ItemImageGallery
 from .models import Comment
 from django.db.models import Avg
+from item.models import Item
 
 
 
@@ -20,6 +21,7 @@ def dashboardView(request):
 def logout_view(request):
     logout(request)
     return redirect ("core:login")
+
 
 def sellerprofile(request, pk):
     seller_info = get_object_or_404(User, pk=pk)
