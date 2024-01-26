@@ -24,14 +24,15 @@ body{
     gap: 3vmin;
 }
 
-.main-container{
-    display: flex;
-    flex-flow: row wrap;
-    width: 100vw;
-    height: 120vh;
-    margin-top: 3vmin;
-    margin-left: 1vmax;
-}
+    .main-container {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100vw;
+        height: 100vh; /* Corrected the height value */
+        margin-top: 3vmin;
+        margin-left: 1vmax;
+    }
+
 .image_section{
     display: flex;
     flex-flow: column wrap;
@@ -75,12 +76,12 @@ body{
     height: 112vmin;
     display: flex;
     flex-flow: column wrap;
-    gap: 5vmin;
+    gap: 4vmin;
 }
 .product_details_main .product_upper{
     display: flex;
     flex-flow: column wrap;
-    gap: 6vmin;
+    gap: 4vmin;
 
 }
 .product_details_main .product_upper .product_detail{
@@ -260,3 +261,9 @@ body{
 
 
 }
+
+
+
+
+
+
