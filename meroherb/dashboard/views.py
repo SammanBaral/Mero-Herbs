@@ -6,6 +6,7 @@ from item.models import Item, ItemImageGallery
 from .models import Comment
 from django.db.models import Avg
 from item.models import Item
+from userprofile.models import UserProfile
 
 
 

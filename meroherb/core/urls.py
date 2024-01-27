@@ -3,6 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 from .forms import LoginForm
 from django.contrib.auth.views import LoginView
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name='core'
 
@@ -14,4 +16,4 @@ urlpatterns=[
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"), 
 
-]
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
