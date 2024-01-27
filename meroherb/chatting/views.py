@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render, redirect
 from item.models import Item
 from .forms import ConversationMessageForm
@@ -80,7 +81,7 @@ def detail(request, pk):
                 try:
                     seller_image_url = message.created_by.selleraccount.image.url
                 except ObjectDoesNotExist:
-                    seller_image_url=None
+                    seller_image_url= message.created_by.userprofile.photo.url
                 break  # Exit the loop once seller information is found
     
     print(convo_user)
@@ -106,5 +107,4 @@ def detail(request, pk):
         'seller_image_url': seller_image_url,
         'convo_user':convo_user
     })
-
 # Create your views here.

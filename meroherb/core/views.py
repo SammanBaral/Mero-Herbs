@@ -3,7 +3,7 @@ from .forms import SignupForm, LoginForm
 from item.models import Category, Item
 from django.contrib import messages
 from item.decorators import unauthenticated_user
-from userprofile.models import UserProfile  # Import your UserProfile model
+from userprofile.models import UserProfile 
 
 @unauthenticated_user
 def signup(request):
@@ -22,8 +22,11 @@ def signup(request):
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
-                # Add other fields as needed
             )
+
+            # Set the default profile picture for the user
+            user_profile.photo = 'default_user.png'
+            user_profile.save()
 
             messages.success(request, "Registered successfully!")
             return redirect('/login')

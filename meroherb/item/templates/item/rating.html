@@ -184,7 +184,11 @@
     <div class="comment_body">
       <div class="comment_user">
         <div style="border-radius:50%; height: 50px; width: 50px;">
-          <img src="{% static './dashboard/images/user.png'%}" style="height: 100%; width: 100%; object-fit: cover;">
+          {% if x.user.selleraccount %}
+          <img src="{{x.user.selleraccount.image.url }}" style="height: 100%; width: 100%; object-fit: cover; border-radius:50%">
+          {% else %}
+          <img src="{{x.user.userprofile.photo.url}}" style="height: 100%; width: 100%; object-fit: cover; border-radius:50%">
+          {% endif%}
         </div>
         <div class="user_rat_info">
           <h1> @{{x.user}}</h1>
