@@ -23,26 +23,35 @@ def dashboardView(request):
 def logout_view(request):
     logout(request)
     return redirect ("core:login")
-
-
 def sellerprofile(request, pk):
     seller_info = get_object_or_404(User, pk=pk)
     comments = Comment.objects.filter(seller=seller_info)
     average_rating = comments.aggregate(Avg('rating'))['rating__avg'] or 0
+    seller_items=Item.objects.filter(created_by=pk)
+
+    items_with_images = []
+    for product in seller_items:
+        item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
+        product_data = {
+            'product': product,
+            'image_url': item_image_gallery.images.first().image.url if item_image_gallery and item_image_gallery.images.exists() else None,
+        }
+        items_with_images.append(product_data)
+
 
  
-
     if request.method == 'POST':
         star_rating = request.POST.get('rating')
         seller_review = request.POST.get('seller_review')
         Comment.objects.create(user=request.user, seller=seller_info, rating=star_rating, text=seller_review)
         return redirect('dashboard:sellerprofile', pk=pk)
-         
+
 
     return render(request, 'dashboard/Profile.html', {
         'seller_info': seller_info,
         'comments':comments,
         'avg_rating':average_rating,
+        'items_with_images':items_with_images,
     })
     
 
