@@ -191,36 +191,7 @@
 
    
          
-    <!-- CARD HTMLLLL
-    =========== -->
-
-   <div class="card_parent">
-      <span class="popularherbs">Some popular herbs</span>
-      <div class="herbs_body">
-         {% for item in items %}
-         <div class="herbs">
-            <div class="herbs_img">
-               <img src="{{item.image.url}}">
-            </div>
-            <div class="herbs_info">
-               <span class="category">{{item.category}}</span>
-               <h1 class="name">{{item.name}}</h1>
-               <span class="product_rating">⭐⭐⭐⭐⭐</span>
-               <a href="{% url 'dashboard:sellerprofile' item.created_by.pk %}" style="text-decoration:none">
-               <h2 class="seller_name">{{item.created_by}}</h2>
-               </a>
-            </div>
-            <div class="price_section">
-               <h1>{{item.price}}</h1>
-               <div class="cart"> <i class="fa-solid fa-cart-shopping"></i> Add to cart</div>
-               <div class="buy"> <i class="fa-solid fa-dollar-sign"></i> Buy </div>
-            </div>
-         </div>
-         {% endfor %}
-
-      </div>
-
-   </div>
+ 
       
 
    <div class="lower_parent">
