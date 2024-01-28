@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
+from core.views import mainpage
 from django.urls import path, include
 
 # Import Debug Toolbar only for development
@@ -13,6 +14,7 @@ app_name = "meroherb"
 
 urlpatterns = [
     path('', include('core.urls')),
+    path('',mainpage,name="first"),
     path('', include('dashboard.urls')),
     path('password_reset/', include('django.contrib.auth.urls')),
     path('', include('item.urls')),
