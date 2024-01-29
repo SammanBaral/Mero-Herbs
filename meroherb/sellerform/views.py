@@ -25,7 +25,6 @@ def sellerform(request):
             messages.error(request, "Please upload your profile picture")
             return render(request, 'sellerform/sellerform.html', {'form': form})
         
-
         else:
             # Check if the user exists
             try:
@@ -36,9 +35,6 @@ def sellerform(request):
                 messages.error(request, "Invalid Username, Try again")
                 return render(request, 'sellerform/sellerform.html', {'form': form})
             
-            
-
-
         # Check if the user should be granted seller status
         if user_should_be_seller(user):
 
@@ -48,13 +44,12 @@ def sellerform(request):
             # Add user to 'seller' group
                 user.groups.add(seller_group)
 
-            # Now, handle the profile picture upload
                 form = UserProfilePhotoForm(request.POST, request.FILES)
                 if form.is_valid():
                     profile = form.save(commit=False)
                     profile.user = user
                     profile.save()
-                    return redirect('item:home')
+                    return redirect('core:main')
                 else:
                     return render(request, 'sellerform/sellerform.html', {'form': form})
             except IntegrityError:

@@ -19,7 +19,7 @@ class Item(models.Model):
     scientific_name = models.CharField(max_length=255, default='')
     description = models.TextField(blank=True, null=True)
     usage_and_benefits = models.TextField(default='', blank=False, null=False)
-    price = models.CharField(max_length=255)
+    price = models.FloatField(max_length=255)
     quantity_available = models.CharField(max_length=255)
     image = models.ImageField(upload_to='item_images', blank=True, null=True)
     is_sold = models.BooleanField(default=False)

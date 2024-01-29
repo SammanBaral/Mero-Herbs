@@ -12,6 +12,7 @@ def is_valid_queryparam(param):
     return param != '' and param is not None and param !=0.0   #for price
 
 def browse(request): 
+   
     query = request.GET.get('query', '')
     category_id= request.GET.get('category', 0)
     categories=Category.objects.all()
@@ -70,6 +71,7 @@ def browse(request):
     elif is_valid_queryparam(price_min) and is_valid_queryparam(price_max):
         items = Item.objects.filter(price__range=(float(price_min),float(price_max)))
         items_with_images = []
+
         for product in items:
             item_image_gallery = ItemImageGallery.objects.filter(item=product).first()
             product_data = {
@@ -124,8 +126,8 @@ def new(request):
         image_files = request.FILES.getlist("images")
 
         if form.is_valid():
-            if len(image_files) > 4:
-                messages.error(request, "You can upload a maximum of 4 images.")
+            if len(image_files) > 3:
+                messages.error(request, "You can upload a maximum of 3 images.")
                 return render(request, 'item/form.html', {
                 'form': form,
                 'title': 'New item',}
@@ -161,16 +163,35 @@ def delete(request, pk):
 
     return redirect('item:browse')
 
+
 @login_required
 def edit(request, pk):
-    item = get_object_or_404(Item, pk= pk, created_by=request.user)
-
+    item = get_object_or_404(Item, pk=pk, created_by=request.user)
+    item_image_gallery, created = ItemImageGallery.objects.get_or_create(item=item)
 
     if request.method == 'POST':
-        form = EditItemForm(request.POST, request.FILES, instance=item)
+        form = EditItemForm(request.POST, instance=item)
+        image_files = request.FILES.getlist("images")
 
         if form.is_valid():
+            if len(image_files) > 3:
+                messages.error(request, "You can upload a maximum of 3 images.")
+                return render(request, 'item/form.html', {
+                'form': form,
+                'title': 'New item',}
+                )
+
             form.save()
+
+            # Clear existing images from the gallery
+            item_image_gallery.images.clear()
+
+            # Add new images to the gallery
+            for image_file in image_files:
+                item_image = ItemImage.objects.create(item=item, image=image_file)
+                item_image_gallery.images.add(item_image)
+
+            messages.success(request, "Item updated successfully")
             return redirect('item:detail', pk=item.id)
     else:
         form = EditItemForm(instance=item)
@@ -179,6 +200,10 @@ def edit(request, pk):
         'form': form,
         'title': 'Edit item',
     })
+
+
+
+
 
 def Category_view(request,pro):
     category=Category.objects.get(name=pro)
