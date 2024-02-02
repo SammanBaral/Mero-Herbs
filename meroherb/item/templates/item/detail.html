@@ -89,8 +89,19 @@
                     </a>
 
                 </div>
-
                 {% else %}
+                <div class="product_buy_section">
+                    {% comment %} <p>Item ID: {{ item.id }}</p> {% endcomment %}
+                
+                    <form method="post" action="{% url 'item:buy_item' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="buy_btn">Buy</button>
+                    </form>
+                </div>
+                
+                {%endif%}
+
+                {% comment %} {% else %}
                 <div class="product_buy_section">
                     <a href="{% url 'chatting:new' item.id %}">
                         <div class="buy_btn">
@@ -98,7 +109,8 @@
                         </div>
                     </a>
                 </div>
-                {%endif%}
+                {%endif%} {% endcomment %}
+
 
 
             </div>

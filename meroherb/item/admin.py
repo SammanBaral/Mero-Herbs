@@ -9,4 +9,4 @@ admin.site.register(ItemImage)
 admin.site.register(ItemImageGallery)
 
 
-
+admin.site.register(Bill)
