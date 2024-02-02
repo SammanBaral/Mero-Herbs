@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item
+from .models import Bill, Item
 
 
 class NewItemForm(forms.ModelForm):
@@ -100,7 +100,10 @@ class EditItemForm(forms.ModelForm):
             }),
         }
 
-
+class BillForm(forms.ModelForm):
+    class Meta:
+        model = Bill
+        fields = ['customer', 'item', 'quantity', 'total_amount']
 
 
 

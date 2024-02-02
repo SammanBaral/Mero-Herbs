@@ -2,12 +2,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .decorators import allowed_users
-from .forms import NewItemForm, EditItemForm
-from .models import Category, Item, review,ItemImage
+from .forms import NewItemForm, EditItemForm, BillForm
+from .models import Category, Item, review,ItemImage, Bill
 from .models import ItemImageGallery, ItemImage
 from django.db import IntegrityError
 from decimal import Decimal
-
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa  
+from django.views import View
+from datetime import datetime
 def is_valid_queryparam(param):
     return param != '' and param is not None and param !=0.0   #for price
 
@@ -19,11 +23,6 @@ def browse(request):
     items = Item.objects.filter(is_sold=False)
     price_min=request.GET.get('input-min',0)
     price_max=request.GET.get('input-max',0)
-
-    for category in categories:
-        category.name = category.name.upper()
-
-    
     for product in items:
             if product.discount > 0:
                 print("discount")
@@ -106,9 +105,10 @@ def detail(request, pk):
 
     if request.method == 'POST':
         star_rating = request.POST.get('rating')
+        item_review = request.POST.get('item_review')
 
         try:
-            review.objects.create(user=request.user, item=item, rating=star_rating)
+            review.objects.create(user=request.user, item=item, rating=star_rating, review_desp=item_review)
         except IntegrityError:
             messages.error(request, "Please fill all the fields")
         else:
@@ -223,3 +223,97 @@ def Category_view(request,pro):
         items_with_images.append(product_data)
 
     return render(request,'item/browse.html',{'items_with_images':items_with_images,'category':category})
+
+
+# def buy_item(request, pk):
+#     item = get_object_or_404(Item, pk=pk)
+    
+#     if request.method == 'POST':
+#         # Assuming you have a button in your buy_item.html that posts to generate_pdf
+#         form = BillForm(request.POST)
+#         if form.is_valid():
+#             # Create a Bill instance based on the data from Item and the form
+#             bill = Bill.objects.create(
+#                 customer_name=form.cleaned_data['customer_name'],
+#                 item_name=item.name,
+#                 quantity=form.cleaned_data['quantity'],
+#                 total_amount=form.cleaned_data['total_amount'],
+#             )
+
+#             return render(request, 'buy_item.html', {'item': item, 'bill': bill})
+
+#     # Render the buy_item template initially
+#     form = BillForm()
+#     return render(request, 'buy_item.html', {'form': form, 'item': item})
+# def generate_unique_bill_no():
+#     timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")  # Use the current timestamp
+#     last_serial_number = Bill.objects.latest('id').id if Bill.objects.exists() else 0
+#     serial_number = last_serial_number + 1
+#     return f"BILL{serial_number}_{timestamp}"
+
+
+def buy_item(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    discounted_price=0
+    if(item.discount > 0):
+                discounted_price = Decimal(item.price) * (1 - Decimal(item.discount) / 100)
+                item.discounted_price=discounted_price
+                print(discounted_price)
+    
+    
+    if request.method == 'POST':
+        bill = Bill.objects.create(
+            customer=request.user,
+            item=item,
+            quantity=item.quantity_available,
+            total_amount=item.price,
+            seller=item.created_by.username,
+            discount_per=item.discount,
+            discount_price=discounted_price
+
+        )
+        generated_bill_no = bill.bill_no
+        bill.save()
+        return render(request, 'item/buy_item.html', {'item': item, 'bill': bill, 'generated_bill_no':generated_bill_no})
+
+    # Render the buy_item template initially
+    return render(request, 'item/buy_item.html', {'item': item})
+
+
+class GeneratePDF(View):
+    def get(self, request, bill_no, *args, **kwargs):
+        bill = get_object_or_404(Bill, bill_no=bill_no)
+        template = get_template('item/bill_template.html')
+        html = template.render({'bill': bill})
+        
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'filename=bill_{bill.bill_no}.pdf'
+        
+        pisa_status = pisa.CreatePDF(html, dest=response)
+        
+        if pisa_status.err:
+            return HttpResponse('Error while generating PDF', status=500)
+        
+        return response
+
+    def post(self, request, bill_no, *args, **kwargs):
+        # Retrieve the bill object
+        bill = get_object_or_404(Bill,  bill_no=bill_no)
+
+        # Handle POST request logic here
+        # You can access form data using `request.POST`
+        # Generate PDF or perform any other necessary actions
+
+        # Example: Generating a PDF response
+        template = get_template('item/bill_template.html')
+        html = template.render({'bill': bill})
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'filename=bill_{bill.bill_no}.pdf'
+
+        pisa_status = pisa.CreatePDF(html, dest=response)
+
+        if pisa_status.err:
+            return HttpResponse('Error while generating PDF', status=500)
+
+        return response
