@@ -34,24 +34,34 @@
                 <div class="upper_body">
                     <section class="bill_details">
                         <p>
-                            <span>Bill from</span>
+                            <span>Bill from:</span>
                             <span>{{bill.seller}}</span>
 
                         </p>
                        
                         <p>
-                            <span>Bill to</span>
+                            <span>Bill to:</span>
                             <span>{{bill.customer}}</span>
                         </p>
 
                         <p>
-                            <span>Issued on</span>
+                            <span>Issued on:</span>
                             <span>{{bill.issued_date_time}}</span>
                         </p>
 
                         <p>
-                            <span>Payment method</span>
+                            <span>Payment method:</span>
                             <span>Cash on delivery</span>
+                        </p>
+
+                        <p>
+                            <span>Delivery Location:</span>
+                            <span>{{bill.delivery}}</span>
+                        </p>
+
+                        <p>
+                            <span>Buyer Contact Number:</span>
+                            <span>{{bill.contact_info}}</span>
                         </p>
 
                     </section>

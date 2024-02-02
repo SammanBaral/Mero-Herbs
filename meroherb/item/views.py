@@ -11,7 +11,11 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa  
 from django.views import View
-from datetime import datetime
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.core.files.base import ContentFile
+from io import BytesIO
+
 def is_valid_queryparam(param):
     return param != '' and param is not None and param !=0.0   #for price
 
@@ -252,13 +256,12 @@ def Category_view(request,pro):
 
 def buy_item(request, pk):
     item = get_object_or_404(Item, pk=pk)
-    discounted_price=0
-    if(item.discount > 0):
-                discounted_price = Decimal(item.price) * (1 - Decimal(item.discount) / 100)
-                item.discounted_price=discounted_price
-                print(discounted_price)
-    
-    
+    discounted_price = 0
+    if item.discount > 0:
+        discounted_price = Decimal(item.price) * (1 - Decimal(item.discount) / 100)
+        item.discounted_price = discounted_price
+        print(discounted_price)
+
     if request.method == 'POST':
         bill = Bill.objects.create(
             customer=request.user,
@@ -267,15 +270,33 @@ def buy_item(request, pk):
             total_amount=item.price,
             seller=item.created_by.username,
             discount_per=item.discount,
-            discount_price=discounted_price
-
+            discount_price=discounted_price,
+            delivery=request.user.userprofile.location,
+            contact_info = request.user.userprofile.contact_number
         )
+
         generated_bill_no = bill.bill_no
         bill.save()
-        return render(request, 'item/buy_item.html', {'item': item, 'bill': bill, 'generated_bill_no':generated_bill_no})
+        # Send email to the seller
+        template = get_template('item/bill_template.html')
+        html = template.render({'bill': bill})
+        
+        pdf_content = ContentFile(pisa.pisaDocument(BytesIO(html.encode('UTF-8'))).dest.getvalue())
+        bill.pdf.save(f'bill_{generated_bill_no}.pdf', pdf_content)
+
+        # Send email to the seller with the attached PDF
+        seller_email = item.created_by.email
+        subject = f'New Bill for Item: {item.name}'
+        message = 'Please deliver the Item as soon as possible'  # You can customize this message
+        email = EmailMessage(subject, message, 'meroherbs0@gmail.com', [seller_email])
+        email.attach_file(bill.pdf.path)  # Attach the generated PDF
+        email.send()
+
+        return render(request, 'item/buy_item.html', {'item': item, 'bill': bill, 'generated_bill_no': generated_bill_no})
 
     # Render the buy_item template initially
     return render(request, 'item/buy_item.html', {'item': item})
+
 
 
 class GeneratePDF(View):
