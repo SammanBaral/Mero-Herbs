@@ -46,6 +46,9 @@
          <img src="{% static '/dashboard/images/user.png' %}" class="user-icon" onclick="toggleMenu()">
          {% endif %}
          {% else %}
+         <a href="{% url 'core:login'%}" class="signup">
+            <div class="signup-btn"> Login</div>
+         </a>
          <a href="{% url 'core:signup'%}" class="signup">
             <div class="signup-btn"> Sign up</div>
          </a>

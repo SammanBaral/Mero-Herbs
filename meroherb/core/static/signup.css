@@ -21,13 +21,20 @@
   .parent .text-wrapper {
     position: absolute;
     top: 30px;
-    left: 42px;
+    left: 55px;
     font-family: "Poppins-SemiBold", Helvetica;
     font-weight: 600;
     color: #000000;
     font-size: 20px;
     letter-spacing: 0;
     line-height: normal;
+
+    display: flex ;
+    font-weight: 600;
+    font-family: Lobster, sans-serif;
+    font-size: 24px;
+    color: black;
+    width: 60px;  
   }
 
   .field-error{
