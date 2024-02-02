@@ -22,7 +22,7 @@ def userprofile(request):
 
     if request.method == 'POST':
         if 'user-details-form-submit' in request.POST:
-            user_profile_form = UserProfileForm(request.POST, instance=user_profile_instance)
+            user_profile_form = UserProfileForm(request.POST, instance=user)
             if user_profile_form.is_valid():
                 user_profile_form.save()
                 messages.success(request, 'User details updated successfully.')
