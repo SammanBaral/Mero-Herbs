@@ -105,10 +105,8 @@ def detail(request, pk):
 
     if request.method == 'POST':
         star_rating = request.POST.get('rating')
-        item_review = request.POST.get('item_review')
-
         try:
-            review.objects.create(user=request.user, item=item, rating=star_rating, review_desp=item_review)
+            review.objects.create(user=request.user, item=item, rating=star_rating)
         except IntegrityError:
             messages.error(request, "Please fill all the fields")
         else:

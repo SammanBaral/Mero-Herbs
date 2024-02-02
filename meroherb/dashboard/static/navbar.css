@@ -104,6 +104,9 @@ header{
     align-items: center;
     display: flex;
 }
+.user-info img{
+    border-radius: 50%;
+}
 .sub-menu-link{
     display: flex;
     align-items: center;

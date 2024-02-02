@@ -75,7 +75,15 @@
                             <span style="color: #008148;">${{bill.total_amount}}</span>
                             <span>{{bill.discount_per}}%</span>
                             <span>{{bill.quantity}}</span>
-                            <span style="color: #008148;">${{bill.discount_price}}</span>
+                            <!-- <span style="color: #008148;">${{bill.discount_price}}</span> -->
+                            {% if bill.discount_price > 0 %}
+                                <!-- <del>${{ item.price }}</del> -->
+                                <span style="color: #008148;">({{bill.discount_price}}% off) </span>
+
+                            {% endif %}
+                            {% else %}
+                            <span style="color: #008148;">({{bill.total_amount}}% off) </span>
+                            {% endif %}
                         </div>
 
                         <hr>

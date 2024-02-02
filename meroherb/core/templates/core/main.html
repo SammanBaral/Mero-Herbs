@@ -120,7 +120,7 @@
                 Sustainability is the only business we know. We put people, plants, and planet before profit with everything we do.
               </p>
 
-              <a href="#" class="banner-btn">Shop now</a>
+              <a href="{% url 'item:browse' %}" class="banner-btn">Shop now</a>
 
             </div>
 
@@ -219,7 +219,7 @@
                 <div class="showcase">
 
                   <a href="{% url 'item:detail' product_data.product.id  %}" class="showcase-img-box">
-                    <img src="{{ product_data.image_url }}"  width="75" height="75" class="showcase-img">
+                    <img src="{{ product_data.image_url }}"  width="141" height="75" class="showcase-img">
                   </a>
 
                   <div class="showcase-content">
@@ -244,7 +244,6 @@
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
-                        &nbsp;<span>No ratings</span>
                         {% endif %}
                     </div>
 
@@ -295,7 +294,7 @@
                   <div class="showcase">
 
                     <a href="{% url 'item:detail' product_data.product.id  %}" class="showcase-img-box">
-                      <img src="{{product_data.image_url}}" width="70" class="showcase-img">
+                      <img src="{{product_data.image_url}}" width="141" height="75" class="showcase-img">
                     </a>
 
                     <div class="showcase-content">
@@ -348,7 +347,7 @@
                   <div class="showcase">
 
                     <a href="{% url 'item:detail' product_data.product.id  %}" class="showcase-img-box">
-                      <img src="{{product_data.image_url}}" class="showcase-img" width="70">
+                      <img src="{{product_data.image_url}}" class="showcase-img" width="141" height="75">
                     </a>
 
                     <div class="showcase-content">
@@ -400,7 +399,7 @@
                   <div class="showcase">
 
                     <a href="{% url 'item:detail' product_data.product.id  %}" class="showcase-img-box">
-                      <img src="{{product_data.image_url}}" class="showcase-img" width="70">
+                      <img src="{{product_data.image_url}}" class="showcase-img" width="141" height="75">
                     </a>
 
                     <div class="showcase-content">
@@ -480,7 +479,6 @@
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
-                        &nbsp;<span>No ratings</span>
                         {% endif %}
                     </div>
 
@@ -540,9 +538,9 @@
               {% for product_data in new_products_with_images %}
 
                 <div class="showcase">
-                  <a href="{% url 'item:detail' product_data.product.id  %}"style="height: 152px;>
+                  <a href="{% url 'item:detail' product_data.product.id  %}" style="height: 152px;">
 
-                  <div class="showcase-banner"style="height: 100%;">
+                  <div class="showcase-banner" style="height: 100%;">
 
                     <img src="{{product_data.image_url}}" alt="Mens Winter Leathers Jackets" width="300"
                       class="product-img default">
@@ -588,7 +586,6 @@
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
                         <i class="fa fa-star" id="star"></i>
-                        &nbsp;<span>No ratings</span>
                         {% endif %}
                     </div>
 

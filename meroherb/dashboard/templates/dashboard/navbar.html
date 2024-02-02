@@ -58,7 +58,7 @@
                {% if request.user.is_authenticated %}
                {% if request.user.selleraccount %}
                {% if request.user.selleraccount.image %}
-               <img src="{{ request.user.selleraccount.image.url }}" class="user-icon" onclick="toggleMenu()">
+                  <img src="{{ request.user.selleraccount.image.url }}" class="user-icon" style="border-radius: 50%;" onclick="toggleMenu()">
                {%endif%}
                {%endif%}
 
@@ -82,10 +82,18 @@
                <span>></span>
             </a>
 
-            {% if request.user.is_authenticated%}
+            <!-- {% if request.user.is_authenticated%}
             <a href="{% url 'chatting:inbox' %}" class="sub-menu-link">
                <img src="{% static '/dashboard/images/addproduct.png'%} " alt=" ">
                <p>Inbox </p>
+               <span>></span>
+            </a>
+            {% endif %} -->
+
+            {% if not request.user.selleraccount%}
+            <a href="{% url 'sellerform:sellerform' %}" class="sub-menu-link">
+               <img src="{% static '/dashboard/images/seller.png'%} " alt=" ">
+               <p>Become Seller </p>
                <span>></span>
             </a>
             {% endif %}
