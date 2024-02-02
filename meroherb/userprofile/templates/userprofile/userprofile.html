@@ -37,8 +37,32 @@
 
     </div>
 
-
+    <div class="field-error">
+        {% if user_profile_form.errors %}
+            {% for field in user_profile_form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    
+        {% if user_profile_form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ user_profile_form.non_field_errors }}
+            </div>
+        {% endif %}
+    
+        {% for msg in messages %}
+            <div class="alert alert-warning" style="width: 100vw; display: flex; align-items: center; justify-content: center; margin: 0;" role="alert">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    </div>
+    
     <div class="main-container">
+        
 
     <div class="container light-style flex-grow-1 container-p-y">
         <h4 class="font-weight-bold py-3 mb-4">
