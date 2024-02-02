@@ -47,6 +47,9 @@ def mainpage(request):
         avg_rating=Avg('review__rating')
     ).order_by('-created_at')[:12]
 
+    for category in categories:
+        category.name = category.name.upper()
+
     new_products_with_images = []
     for product in new_products:
         item_image_gallery = ItemImageGallery.objects.filter(item=product).first()

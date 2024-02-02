@@ -19,6 +19,11 @@ def browse(request):
     items = Item.objects.filter(is_sold=False)
     price_min=request.GET.get('input-min',0)
     price_max=request.GET.get('input-max',0)
+
+    for category in categories:
+        category.name = category.name.upper()
+
+    
     for product in items:
             if product.discount > 0:
                 print("discount")
@@ -101,10 +106,9 @@ def detail(request, pk):
 
     if request.method == 'POST':
         star_rating = request.POST.get('rating')
-        item_review = request.POST.get('item_review')
 
         try:
-            review.objects.create(user=request.user, item=item, rating=star_rating, review_desp=item_review)
+            review.objects.create(user=request.user, item=item, rating=star_rating)
         except IntegrityError:
             messages.error(request, "Please fill all the fields")
         else:

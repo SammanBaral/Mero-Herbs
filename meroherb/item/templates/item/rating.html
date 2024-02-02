@@ -152,7 +152,6 @@
 
   <div class="form_parent">
 
-    <p style="font-weight:600;">Write a review</p>
     <form method="Post">
       {% csrf_token %}
 
@@ -171,8 +170,8 @@
 
       </div>
       <div class="comment_box">
-        <textarea name="item_review" placeholder="write a review" rows="6" cols="50" id="review-text"
-          required></textarea>
+        <!-- <textarea name="item_review" placeholder="write a review" rows="6" cols="50" id="review-text"
+          required></textarea> -->
         <input type="submit" class="post_btn" value="Post">
 
       </div>
