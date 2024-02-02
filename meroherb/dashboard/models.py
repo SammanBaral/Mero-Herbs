@@ -9,7 +9,4 @@ class Comment(models.Model):
     seller = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-
-
-
-
+    text = models.TextField(null=True)
