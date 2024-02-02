@@ -24,7 +24,7 @@
     <div class="parent_wrapper">
       <div class="user_parent">
         <div class="user_img">
-          <img src="{% static './dashboard/images/profile.jpg'%}" />
+          <img src="{{ request.user.selleraccount.image.url }}" />
         </div>
 
         <div class="user_data">
