@@ -540,9 +540,9 @@
               {% for product_data in new_products_with_images %}
 
                 <div class="showcase">
-                  <a href="{% url 'item:detail' product_data.product.id  %}">
+                  <a href="{% url 'item:detail' product_data.product.id  %}"style="height: 152px;>
 
-                  <div class="showcase-banner">
+                  <div class="showcase-banner"style="height: 100%;">
 
                     <img src="{{product_data.image_url}}" alt="Mens Winter Leathers Jackets" width="300"
                       class="product-img default">
