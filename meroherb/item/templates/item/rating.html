@@ -185,8 +185,10 @@
         <div style="border-radius:50%; height: 50px; width: 50px;">
           {% if x.user.selleraccount %}
           <img src="{{x.user.selleraccount.image.url }}" style="height: 100%; width: 100%; object-fit: cover; border-radius:50%">
-          {% else %}
+          {% elif x.user.userprofile %}
           <img src="{{x.user.userprofile.photo.url}}" style="height: 100%; width: 100%; object-fit: cover; border-radius:50%">
+          {% else %}
+          <img src="{% static 'core/images/default_user.png' %}" style="height: 100%; width: 100%; object-fit: cover; border-radius:50%">         
           {% endif%}
         </div>
         <div class="user_rat_info">

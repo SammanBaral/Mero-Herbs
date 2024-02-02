@@ -85,7 +85,11 @@
             <td style="margin-left: 60px; color: #008148;">${{bill.total_amount}}</td>
             <td style="margin-left: 50px;">{{bill.discount_per}}%</td>
             <td style="margin-left: 55px;">{{bill.quantity}}</td>
-            <td style="margin-left: 50px;  color: #008148;">${{bill.discount_price}}</td>
+            {% if bill.discount_price > 0 %}
+              <td style="margin-left: 50px;  color: #008148;">${{bill.discount_price}}</td>
+            {% else %}
+              <td style="margin-left: 50px;  color: #008148;">${{bill.total_amount}}</td>
+            {% endif %}
           </tr>
 
           {% comment %} <tr style="font-size: 1.46rem;">
